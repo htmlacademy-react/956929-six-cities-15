@@ -1,12 +1,3 @@
-type Card = {
-  id: number;
-  title: string;
-  price: number;
-  type: string;
-  isPremium: boolean;
-  image: string;
-}
-
 export default function Card(): JSX.Element {
   return (
     <article className="cities__card place-card">
