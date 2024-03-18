@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Logo from '../../components/header/logo';
 
-export default function NotFound(): JSX.Element {
+export default function NotFoundPage(): JSX.Element {
   return (
     <div className="page">
 

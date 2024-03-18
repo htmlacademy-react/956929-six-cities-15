@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 
-export default function Offer(): JSX.Element {
+export default function OfferPage(): JSX.Element {
   return (
     <div className="page">
 
