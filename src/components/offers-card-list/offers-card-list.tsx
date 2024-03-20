@@ -3,14 +3,15 @@ import OfferCard from '../offer-card/offer-card';
 
 type OffersCardListProps = {
     offersList: Offer;
+    setCardOfferHoverId(id: string | null): void;
 }
 
-export default function OffersCardList({offersList}:OffersCardListProps):JSX.Element {
+export default function OffersCardList({offersList, setCardOfferHoverId }:OffersCardListProps):JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
 
       {offersList.map((offer) => (
-        <OfferCard offerCard={offer} />
+        <OfferCard key={offer.id} offerCard={offer} setCardOfferHoverId={setCardOfferHoverId} />
       ))}
 
     </div>

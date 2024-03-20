@@ -36,15 +36,15 @@ export default function App({placesToStay, offers, reviews}: AppProps): JSX.Elem
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <FavoritesPage />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <FavoritesPage offers={offers} />
               </PrivateRoute>
             }
 
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage offers={offers} reviews={reviews} />}
           />
           <Route
             path="*"

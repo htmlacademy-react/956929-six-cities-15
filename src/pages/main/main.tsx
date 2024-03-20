@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+
 import Header from '../../components/header/header';
-// import Card from '../../components/offer-card-item/offer-card-item';
+
 import OffersCardList from '../../components/offers-card-list/offers-card-list';
 import { Offer } from '../../types/offer';
 
@@ -10,6 +12,9 @@ type MainProps = {
 };
 
 export default function MainPage({placesToStay, offers}: MainProps): JSX.Element {
+
+  const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
+
   return (
     <div className="page page--gray page--main">
 
@@ -79,11 +84,11 @@ export default function MainPage({placesToStay, offers}: MainProps): JSX.Element
               </form>
 
 
-              <OffersCardList offersList={offers}/>
+              <OffersCardList offersList={offers} setCardOfferHoverId={setCardOfferHoverId} />
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">{cardOfferHoverId}</section>
             </div>
           </div>
         </div>
