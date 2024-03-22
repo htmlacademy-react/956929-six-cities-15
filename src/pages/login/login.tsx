@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/header/logo';
 
-export default function Login(): JSX.Element {
+export default function LoginPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
