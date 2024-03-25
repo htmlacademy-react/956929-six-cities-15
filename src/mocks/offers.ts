@@ -13,6 +13,12 @@ export const offers: Offer = [
     rating: 1.9,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/13.jpg'
+    ],
     goods: [
       'Wi-Fi',
       'Washing machine',
@@ -49,6 +55,12 @@ export const offers: Offer = [
     rating: 2.6,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/1.jpg'
+    ],
     goods: [
       'Heating',
       'Coffee machine',
@@ -85,6 +97,11 @@ export const offers: Offer = [
     rating: 4.2,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/12.jpg'
+    ],
     goods: [
       'Kitchen',
       'Dishwasher',
@@ -123,6 +140,13 @@ export const offers: Offer = [
     rating: 1,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg'
+    ],
     goods: [
       'Kitchen',
       'Dishwasher',
