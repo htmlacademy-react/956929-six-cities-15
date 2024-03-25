@@ -11,8 +11,8 @@ import { Review } from '../../types/review';
 
 
 type OfferProps = {
-  offers: Offer;
-  reviews: Review;
+  offers: Offer[];
+  reviews: Review[];
 };
 
 
@@ -22,7 +22,7 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
   const offerId = params.id;
 
   const selectedOffer = offers.filter((offer) => offer.id === offerId)[0];
-  const { isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host , description } = selectedOffer;
+  const { images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host , description } = selectedOffer;
   const [ isFavoriteOffer, setIsFavoriteOffer ] = useState(isFavorite);
 
   const { avatarUrl, hostName, isPro } = host;
@@ -40,24 +40,14 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+              {images.map((url, id) => {
+                const keyValue = `${id}-${url}`;
+                return (
+                  <div key={keyValue} className="offer__image-wrapper">
+                    <img className="offer__image" src={url} alt="Photo studio" />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="offer__container container">

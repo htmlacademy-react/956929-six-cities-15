@@ -4,17 +4,18 @@ import { countStars } from '../../utils/utils';
 
 type ReviewProps = {
     reviewCard: Review;
+    counter: number;
 };
 
-export default function ReviewCard({reviewCard}: ReviewProps):JSX.Element {
+export default function ReviewCard({reviewCard, counter}: ReviewProps):JSX.Element {
 
-  const { id, user, comment, rating, date } = reviewCard;
+  const { user, comment, rating, date } = reviewCard;
   const { name, avatarUrl } = user;
 
   return (
     <div>
       <h2 className="reviews__title">
-        Reviews &middot;<span className="reviews__amount">1</span>
+        Reviews &middot;<span className="reviews__amount">{++counter}</span>
       </h2>
 
       <ul className="reviews__list">

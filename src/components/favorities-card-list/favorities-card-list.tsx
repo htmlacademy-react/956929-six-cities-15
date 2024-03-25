@@ -4,7 +4,7 @@ import FavoritesCard from '../../components/favorities-card/favorities-card';
 import { Offer } from '../../types/offer';
 
 type PlacesOffersProps = {
-  favoritiesOffers: Offer;
+  favoritiesOffers: Offer[];
   name: string;
 };
 
