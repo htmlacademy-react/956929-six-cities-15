@@ -9,10 +9,10 @@ import { LOCATIONS } from '../../const';
 
 
 type FavoritesProps = {
-  offers: Offer;
+  offers: Offer[];
 }
 
-export default function FavoritesPage({offers}: FavoritesProps): JSX.Element {
+export default function FavoritePage({offers}: FavoritesProps): JSX.Element {
 
   const favoritesCard = offers.filter((offer) => offer.isFavorite === true);
 

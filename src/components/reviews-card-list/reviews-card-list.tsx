@@ -3,7 +3,7 @@ import ReviewForm from '../review-form/review-form';
 import { Review } from '../../types/review';
 
 type ReviewsCardListProps = {
-    reviewsList: Review;
+    reviewsList: Review[];
 }
 
 export default function ReviewsCardList({reviewsList}: ReviewsCardListProps):JSX.Element {

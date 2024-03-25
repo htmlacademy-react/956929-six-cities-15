@@ -10,7 +10,7 @@ import { city } from '../../mocks/city';
 
 type MainProps = {
   placesToStay: number;
-  offers: Offer;
+  offers: Offer[];
 };
 
 export default function MainPage({placesToStay, offers}: MainProps): JSX.Element {

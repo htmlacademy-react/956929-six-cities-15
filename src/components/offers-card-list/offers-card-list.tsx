@@ -2,7 +2,7 @@ import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
 type OffersCardListProps = {
-    offersList: Offer;
+    offersList: Offer[];
     setCardOfferHoverId(id: string | null): void;
 }
 

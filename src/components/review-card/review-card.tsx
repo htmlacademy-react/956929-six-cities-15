@@ -8,7 +8,7 @@ type ReviewProps = {
 
 export default function ReviewCard({reviewCard}: ReviewProps):JSX.Element {
 
-  const { id, user, comment, rating, date } = reviewCard;
+  const { user, comment, rating, date } = reviewCard;
   const { name, avatarUrl } = user;
 
   return (

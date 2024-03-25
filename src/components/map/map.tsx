@@ -1,15 +1,15 @@
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 
 import useMap from '../../hooks/use-map';
-import {CityMap} from '../../types/city-map';
-import {Offer} from '../../types/offer';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import { CityMap } from '../../types/city-map';
+import { Offer } from '../../types/offer';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
   city: CityMap;
-  offers: Offer;
+  offers: Offer[];
   cardHoverId: string | null;
 };
 
