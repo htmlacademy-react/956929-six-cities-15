@@ -22,7 +22,7 @@ export const LOCATIONS = {
   Amsterdam: 'Amsterdam',
   Hamburg: 'Hamburg',
   Dusseldorf: 'Dusseldorf',
-}
+};
 
 export const URL_MARKER_DEFAULT = './public/img/pin.svg';
 
