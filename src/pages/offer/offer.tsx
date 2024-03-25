@@ -12,7 +12,7 @@ import { Review } from '../../types/review';
 
 type OfferProps = {
   offers: Offer[];
-  reviews: Review;
+  reviews: Review[];
 };
 
 

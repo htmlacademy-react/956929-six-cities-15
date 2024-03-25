@@ -17,7 +17,7 @@ import { Review } from '../../types/review';
 type AppProps = {
   placesToStay: number;
   offers: Offer[];
-  reviews: Review;
+  reviews: Review[];
 };
 
 export default function App({placesToStay, offers, reviews}: AppProps): JSX.Element {
