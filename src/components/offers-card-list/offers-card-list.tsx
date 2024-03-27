@@ -11,7 +11,7 @@ export default function OffersCardList({offersList, setCardOfferHoverId }:Offers
     <div className="cities__places-list places__list tabs__content">
 
       {offersList.map((offer) => (
-        <OfferCard key={offer.id} offerCard={offer} setCardOfferHoverId={setCardOfferHoverId} />
+        <OfferCard key={offer.id} className={'cities'} offerCard={offer} setCardOfferHoverId={setCardOfferHoverId} />
       ))}
 
     </div>
