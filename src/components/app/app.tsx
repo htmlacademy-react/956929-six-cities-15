@@ -4,7 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 
 import MainPage from '../../pages/main/main';
 import LoginPage from '../../pages/login/login';
-import FavoritesPage from '../../pages/favorites/favorites';
+import FavoritePage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import NotFoundPage from '../../pages/not-found/not-found';
 
@@ -16,8 +16,8 @@ import { Review } from '../../types/review';
 
 type AppProps = {
   placesToStay: number;
-  offers: Offer;
-  reviews: Review;
+  offers: Offer[];
+  reviews: Review[];
 };
 
 export default function App({placesToStay, offers, reviews}: AppProps): JSX.Element {
@@ -37,7 +37,7 @@ export default function App({placesToStay, offers, reviews}: AppProps): JSX.Elem
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage offers={offers} />
+                <FavoritePage offers={offers} />
               </PrivateRoute>
             }
 

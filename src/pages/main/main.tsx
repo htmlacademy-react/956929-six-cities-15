@@ -2,17 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 
 import Header from '../../components/header/header';
-
 import OffersCardList from '../../components/offers-card-list/offers-card-list';
+import Map from '../../components/map/map';
 import { Offer } from '../../types/offer';
+
+import { city } from '../../mocks/city';
 
 type MainProps = {
   placesToStay: number;
-  offers: Offer;
+  offers: Offer[];
 };
 
 export default function MainPage({placesToStay, offers}: MainProps): JSX.Element {
-
   const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
 
   return (
@@ -88,7 +89,7 @@ export default function MainPage({placesToStay, offers}: MainProps): JSX.Element
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">{cardOfferHoverId}</section>
+              <Map mapСlassName={'cities'} offers={offers} city={city} cardActiveId={cardOfferHoverId} />
             </div>
           </div>
         </div>

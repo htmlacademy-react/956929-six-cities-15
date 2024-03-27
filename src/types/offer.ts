@@ -9,11 +9,12 @@ export type Offer = {
     price: number;
     isPremium: boolean;
     isFavorite: boolean;
+    maxAdults: number;
     rating: number;
     previewImage: string;
-    image: string[];
+    images: string[];
+    goods: string[];
     bedrooms: number;
-    adults: number;
     description: string;
     city: City;
     location: Location;

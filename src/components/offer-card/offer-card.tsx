@@ -6,32 +6,33 @@ import { countStars } from '../../utils/utils';
 
 
 type PlaceCardProps = {
+  className: 'cities' | 'near-places';
   offerCard: Offer;
-  setCardOfferHoverId(id: string | null): void;
+  setCardOfferHoverId?(id: string | null): void;
 }
 
 
-export default function OfferCard({offerCard, setCardOfferHoverId}:PlaceCardProps): JSX.Element {
+export default function OfferCard({className, offerCard, setCardOfferHoverId}:PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
   const [isFavoriteCard, setIsFavoriteCard] = useState(isFavorite);
 
   const handleMouseOver = () => {
-    setCardOfferHoverId(id);
+    setCardOfferHoverId?.(id);
   };
 
   const handleMouseOut = () => {
-    setCardOfferHoverId(null);
+    setCardOfferHoverId?.(null);
   };
 
   return (
-    <article className="cities__card place-card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`offer/${id}`}>
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -65,7 +66,7 @@ export default function OfferCard({offerCard, setCardOfferHoverId}:PlaceCardProp
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${id}`}>
+          <Link to={`/offer/${id}`}>
             {title}
           </Link>
         </h2>
