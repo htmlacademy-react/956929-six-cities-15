@@ -126,7 +126,7 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
             </div>
           </div>
 
-          <Map mapType={'offer'} offers={offers} city={city} cardActiveId={id} />
+          <Map mapСlassName={'offer'} offers={offers} city={city} cardActiveId={id} />
 
         </section>
         <div className="container">

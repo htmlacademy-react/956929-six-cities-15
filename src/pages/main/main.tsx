@@ -89,7 +89,7 @@ export default function MainPage({placesToStay, offers}: MainProps): JSX.Element
 
             </section>
             <div className="cities__right-section">
-              <Map mapType={'cities'} offers={offers} city={city} cardActiveId={cardOfferHoverId} />
+              <Map mapСlassName={'cities'} offers={offers} city={city} cardActiveId={cardOfferHoverId} />
             </div>
           </div>
         </div>

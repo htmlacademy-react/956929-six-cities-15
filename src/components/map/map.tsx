@@ -8,7 +8,7 @@ import { Offer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
-  mapType: 'cities' | 'offer';
+  mapСlassName: 'cities' | 'offer';
   city: CityMap;
   offers: Offer[];
   cardActiveId: string | null;
@@ -26,7 +26,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [27, 39],
 });
 
-export default function Map({mapType,city, offers, cardActiveId}: MapProps): JSX.Element {
+export default function Map({mapСlassName,city, offers, cardActiveId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -48,7 +48,7 @@ export default function Map({mapType,city, offers, cardActiveId}: MapProps): JSX
   }, [map, offers, cardActiveId ]);
 
   return (
-    <section className={`${mapType}__map map`} ref={mapRef}>
+    <section className={`${mapСlassName}__map map`} ref={mapRef}>
     </section>
   );
 }
