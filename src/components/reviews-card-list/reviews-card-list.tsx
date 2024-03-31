@@ -3,14 +3,14 @@ import ReviewForm from '../review-form/review-form';
 import { Review } from '../../types/review';
 
 type ReviewsCardListProps = {
-    reviewsList: Review;
+    reviewsList: Review[];
 }
 
 export default function ReviewsCardList({reviewsList}: ReviewsCardListProps):JSX.Element {
   return (
     <section className="offer__reviews reviews">
-      { reviewsList.map((review) => (
-        <ReviewCard key={review.id} reviewCard={review} />
+      { reviewsList.map((review, counter) => (
+        <ReviewCard key={review.id} reviewCard={review} counter={counter}/>
       ))}
       <ReviewForm />
     </section>

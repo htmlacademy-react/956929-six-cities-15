@@ -1,6 +1,6 @@
-import { Reviews } from '../types/review';
+import { Review } from '../types/review';
 
-export const reviews: Review = [
+export const reviews: Review[] = [
   {
     'id': 'd131ff97-9125-4919-833c-5fc2bdcef2f6',
     'comment': 'Home is amazing. It\'s like staying in a museum. The rooms, furnishings and artworks are incredible. The views of My Vesuvius',
