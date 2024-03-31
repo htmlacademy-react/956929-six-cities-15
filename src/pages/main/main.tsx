@@ -14,7 +14,6 @@ type MainProps = {
 };
 
 export default function MainPage({placesToStay, offers}: MainProps): JSX.Element {
-
   const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
 
   return (
@@ -90,7 +89,7 @@ export default function MainPage({placesToStay, offers}: MainProps): JSX.Element
 
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} city={city} cardHoverId={cardOfferHoverId} />
+              <Map mapСlassName={'cities'} offers={offers} city={city} cardActiveId={cardOfferHoverId} />
             </div>
           </div>
         </div>

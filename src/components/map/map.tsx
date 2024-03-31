@@ -8,9 +8,10 @@ import { Offer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
+  mapСlassName: 'cities' | 'offer';
   city: CityMap;
   offers: Offer[];
-  cardHoverId: string | null;
+  cardActiveId: string | null;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -25,8 +26,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [27, 39],
 });
 
-export default function Map({city, offers, cardHoverId}: MapProps): JSX.Element {
-
+export default function Map({mapСlassName,city, offers, cardActiveId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -38,17 +38,17 @@ export default function Map({city, offers, cardHoverId}: MapProps): JSX.Element 
             lat: offer.location.latitude,
             lng: offer.location.longitude
           },{
-            icon: (cardHoverId !== undefined && offer.id === cardHoverId)
+            icon: (cardActiveId && offer.id === cardActiveId)
               ? currentCustomIcon
               : defaultCustomIcon
           })
           .addTo(map);
       });
     }
-  }, [map, offers, cardHoverId ]);
+  }, [map, offers, cardActiveId ]);
 
   return (
-    <section className="cities__map map" ref={mapRef}>
+    <section className={`${mapСlassName}__map map`} ref={mapRef}>
     </section>
   );
 }
