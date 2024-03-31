@@ -15,19 +15,19 @@ import { Review } from '../../types/review';
 
 
 type AppProps = {
-  placesToStay: number;
   offers: Offer[];
   reviews: Review[];
+  citiesList: string[];
 };
 
-export default function App({placesToStay, offers, reviews}: AppProps): JSX.Element {
+export default function App({offers, reviews, citiesList}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage placesToStay={placesToStay} offers={offers} />}
+            element={<MainPage citiesList={citiesList} />}
           />
           <Route
             path={AppRoute.Login}

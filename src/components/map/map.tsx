@@ -47,6 +47,12 @@ export default function Map({mapСlassName,city, offers, cardActiveId}: MapProps
     }
   }, [map, offers, cardActiveId ]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView([city.lat, city.lng], city.zoom);
+    }
+  }, [map, city]);
+
   return (
     <section className={`${mapСlassName}__map map`} ref={mapRef}>
     </section>
