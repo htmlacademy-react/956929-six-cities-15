@@ -73,3 +73,10 @@ export const citiesList = Object.values(LOCATIONS);
 export const DEFAULT_CITY = LOCATIONS.Paris;
 
 export const [defaultLocation] = cityMap.filter((item) => item.title === DEFAULT_CITY);
+
+export enum SortType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
