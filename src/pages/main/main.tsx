@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
-
 import Header from '../../components/header/header';
 import OffersCardList from '../../components/offers-card-list/offers-card-list';
 import Map from '../../components/map/map';
 import LocationsList from '../../components/location-list/location-list';
 import { useAppSelector } from '../../hooks/index';
-import Sort from '../../components/sort/sort.tsx';
+import Sort from '../../components/sort/sort';
+
 
 type MainProps = {
   citiesList: string[];

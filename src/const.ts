@@ -89,4 +89,12 @@ export enum ApiRoute {
   Logout = '/logout'
 }
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export enum TitleSpace {
+  Offers = 'OFFERS',
+  Favorites = 'FAVORITES',
+  Reviews = 'REVIEWS',
+  User = 'USER',
+  Data = 'DATA',
+  Error = 'ERROR'
+}
+

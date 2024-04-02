@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main/main';
@@ -11,6 +11,8 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 import Spinner from '../spinner/spinner';
 import { useAppSelector } from '../../hooks';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
 
 
 type AppProps = {
@@ -31,7 +33,7 @@ export default function App({offers, reviews, citiesList}: AppProps): JSX.Elemen
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -59,7 +61,7 @@ export default function App({offers, reviews, citiesList}: AppProps): JSX.Elemen
             element={<NotFoundPage />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
