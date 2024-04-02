@@ -17,7 +17,8 @@ export default function MainPage({citiesList}: MainProps): JSX.Element {
   const cityActive = useAppSelector((state) => state.cityActive);
   const offersActive = useAppSelector((state) => state.offers);
   const cityMapActive = useAppSelector((state) => state.city);
-  const placesCount = offersActive.length;
+  const filterCityOffers = offersActive.filter((offer) => offer.city.name === cityActive);
+  const placesCount = filterCityOffers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -40,11 +41,11 @@ export default function MainPage({citiesList}: MainProps): JSX.Element {
               <b className="places__found">{placesCount} places to stay in {cityActive}</b>
 
               <Sort />
-              <OffersCardList offersList={offersActive} setCardOfferHoverId={setCardOfferHoverId} />
+              <OffersCardList offersList={filterCityOffers} setCardOfferHoverId={setCardOfferHoverId} />
 
             </section>
             <div className="cities__right-section">
-              <Map mapСlassName={'cities'} offers={offersActive} city={cityMapActive} cardActiveId={cardOfferHoverId} />
+              <Map mapСlassName={'cities'} offers={filterCityOffers} city={cityMapActive} cardActiveId={cardOfferHoverId} />
             </div>
           </div>
         </div>
