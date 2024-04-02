@@ -126,7 +126,6 @@ export const offers: Offer[] = [
       isPro: true,
       avatarUrl: 'https://i.pravatar.cc/2003'
     }
-
   },
   {
     id: 'd995f437-9aca-498f-bf66-603fd919d005',
@@ -174,5 +173,213 @@ export const offers: Offer[] = [
       isPro: true,
       avatarUrl: 'https://i.pravatar.cc/2004'
     }
+  },
+  {
+    id: 'ee47aec6-6983-4f54-acc5-03ba0e2f8e0e',
+    title: 'Penthouse, 4-5 rooms + 5 balconies',
+    type: 'house',
+    bedrooms: 3,
+    maxAdults: 3,
+    price: 797,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/11.jpg'
+    ],
+    goods: [
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge'
+    ],
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.1,
+    host: {
+      hostName: 'Nastya',
+      isPro: true,
+      avatarUrl: 'https://i.pravatar.cc/2003'
+    }
+  },
+  {
+    id: 'cf8b1b8f-8f23-43b7-b4a7-989882d1ea49',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'hotel',
+    bedrooms: 3,
+    maxAdults: 3,
+    price: 491,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg'
+    ],
+    goods: [
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge'
+    ],
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 1.6,
+    host: {
+      hostName: 'Nastya',
+      isPro: true,
+      avatarUrl: 'https://i.pravatar.cc/2003'
+    }
+  },
+  {
+    id: '9e411218-b425-4ef8-ac95-05dc47517dba',
+    title: 'Tile House',
+    type: 'apartment',
+    bedrooms: 3,
+    maxAdults: 3,
+    price: 151,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/16.jpg'
+    ],
+    goods: [
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge'
+    ],
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.834610000000005,
+      longitude: 2.335499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.3,
+    host: {
+      hostName: 'Nastya',
+      isPro: true,
+      avatarUrl: 'https://i.pravatar.cc/2003'
+    }
+  },
+  {
+    id: '6a55bede-b58f-4f4e-bdd4-45adc3b61f92',
+    title: 'Loft Studio in the Central Area',
+    type: 'hotel',
+    bedrooms: 3,
+    maxAdults: 3,
+    price: 104,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/17.jpg'
+    ],
+    goods: [
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge'
+    ],
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.85761,
+      longitude: 2.358499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.7,
+    host: {
+      hostName: 'Nastya',
+      isPro: true,
+      avatarUrl: 'https://i.pravatar.cc/2003'
+    }
+  },
+  {
+    id: '6a5sdfvde-b58f-4f4e-bdd4-45adc3b61f92',
+    title: 'Cozy room',
+    type: 'Room',
+    price: 180,
+    isPremium: true,
+    isFavorite: false,
+    rating: 3.5,
+    bedrooms: 2,
+    maxAdults: 3,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+    description: 'Wood and stone place.',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg'
+    ],
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402157,
+        longitude: 6.776314654,
+        zoom: 10
+      },
+    },
+    location: {
+      latitude: 51.225402157,
+      longitude: 6.776314654,
+      zoom: 10
+    },
+    host: {
+      hostName: 'Ann',
+      isPro: true,
+      avatarUrl: 'https://i.pravatar.cc/128'
+    },
+    goods: ['Wi-Fi',
+      'Coffee machine',
+      'Dishwasher',
+    ],
   }
 ];

@@ -10,8 +10,9 @@ import Map from '../../components/map/map';
 import { countStars } from '../../utils/utils';
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
-import { city } from '../../mocks/city';
 import { MAX_NEAR_SHOW } from '../../const';
+
+import { useAppSelector } from '../../hooks/index';
 
 type OfferProps = {
   offers: Offer[];
@@ -20,11 +21,12 @@ type OfferProps = {
 
 
 export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
-
+  const cityMapActive = useAppSelector((state) => state.city);
   const params = useParams();
   const offerId = params.id;
   const selectedOffer = offers.filter((offer) => offer.id === offerId)[0];
-  const otherOffers = offers.filter((offer) => offer.id !== selectedOffer?.id).slice(0, MAX_NEAR_SHOW);
+  const otherOffers = offers.filter((offer) => offer.id !== selectedOffer?.id && offer.city.name === selectedOffer?.city.name).slice(0, MAX_NEAR_SHOW);
+
   const { id, images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host , description } = selectedOffer;
   const { avatarUrl, hostName, isPro } = host;
 
@@ -32,7 +34,6 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
 
   return (
     <div className="page">
-
       <Helmet>
         <title>6 cities: offer</title>
       </Helmet>
@@ -126,7 +127,7 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
             </div>
           </div>
 
-          <Map mapСlassName={'offer'} offers={offers} city={city} cardActiveId={id} />
+          <Map mapСlassName={'offer'} offers={offers} city={cityMapActive} cardActiveId={id} />
 
         </section>
         <div className="container">
