@@ -80,3 +80,13 @@ export enum SortType {
   HighToLow = 'Price: high to low',
   TopRated = 'Top rated first',
 }
+
+export enum ApiRoute {
+  Favorite = '/favorite',
+  Offers = '/offers',
+  Comments = '/comments/',
+  Login = '/login',
+  Logout = '/logout'
+}
+
+export const TIMEOUT_SHOW_ERROR = 2000;

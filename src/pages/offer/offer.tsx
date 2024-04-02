@@ -1,17 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import Header from '../../components/header/header';
 import ReviewsCardList from '../../components/reviews-card-list/reviews-card-list';
 import NearPlaceCardList from '../../components/near-place-card-list/near-place-card-list';
 import Map from '../../components/map/map';
-
 import { countStars } from '../../utils/utils';
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 import { MAX_NEAR_SHOW } from '../../const';
-
 import { useAppSelector } from '../../hooks/index';
 
 type OfferProps = {
@@ -26,10 +23,8 @@ export default function OfferPage({offers, reviews}: OfferProps): JSX.Element {
   const offerId = params.id;
   const selectedOffer = offers.filter((offer) => offer.id === offerId)[0];
   const otherOffers = offers.filter((offer) => offer.id !== selectedOffer?.id && offer.city.name === selectedOffer?.city.name).slice(0, MAX_NEAR_SHOW);
-
   const { id, images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host , description } = selectedOffer;
   const { avatarUrl, hostName, isPro } = host;
-
   const [ isFavoriteOffer, setIsFavoriteOffer ] = useState(isFavorite);
 
   return (
