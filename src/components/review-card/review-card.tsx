@@ -1,23 +1,17 @@
 import { Review } from '../../types/review';
 import { countStars } from '../../utils/utils';
 
-
 type ReviewProps = {
     reviewCard: Review;
-    counter: number;
 };
 
-export default function ReviewCard({reviewCard, counter}: ReviewProps):JSX.Element {
-
+export default function ReviewCard({reviewCard}: ReviewProps):JSX.Element {
   const { user, comment, rating, date } = reviewCard;
   const { name, avatarUrl } = user;
+  const dueDate = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date(date.split('T')[0]));
 
   return (
     <div>
-      <h2 className="reviews__title">
-        Reviews &middot;<span className="reviews__amount">{++counter}</span>
-      </h2>
-
       <ul className="reviews__list">
         <li className="reviews__item">
           <div className="reviews__user user">
@@ -38,7 +32,9 @@ export default function ReviewCard({reviewCard, counter}: ReviewProps):JSX.Eleme
             <p className="reviews__text">
               {comment}
             </p>
-            <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+            <time className="reviews__time" dateTime={date}>
+              {dueDate}
+            </time>
           </div>
         </li>
       </ul>

@@ -1,22 +1,15 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Offer } from '../../types/offer';
 import { countStars } from '../../utils/utils';
 
 type FavoritesCardProps = {
-  favoritesOffer: Offer;
+  card: Offer;
 }
 
-
-export default function FavoritesCard({favoritesOffer}: FavoritesCardProps): JSX.Element {
-
-  const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = favoritesOffer;
-
-  const [isFavoriteCard, setIsFavoriteCard] = useState(isFavorite);
+export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
+  const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = card;
 
   return (
-
     <article className="favorites__card place-card">
       {isPremium === true &&
           <div className="place-card__mark">
@@ -33,9 +26,7 @@ export default function FavoritesCard({favoritesOffer}: FavoritesCardProps): JSX
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onClick={() => setIsFavoriteCard(!isFavoriteCard)}
-            className={`place-card__bookmark-button button ${isFavoriteCard ? 'place-card__bookmark-button--active' : '' }`} type="button"
-          >
+          <button className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : '' }`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -56,7 +47,5 @@ export default function FavoritesCard({favoritesOffer}: FavoritesCardProps): JSX
         <p className="place-card__type">{type}</p>
       </div>
     </article>
-
-
   );
 }

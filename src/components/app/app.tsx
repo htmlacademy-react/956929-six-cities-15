@@ -7,8 +7,6 @@ import FavoritePage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import NotFoundPage from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
 import Spinner from '../spinner/spinner';
 import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
@@ -16,12 +14,10 @@ import HistoryRouter from '../history-route/history-route';
 
 
 type AppProps = {
-  offers: Offer[];
-  reviews: Review[];
   citiesList: string[];
 };
 
-export default function App({offers, reviews, citiesList}: AppProps): JSX.Element {
+export default function App({ citiesList}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.offersIsLoading);
 
@@ -47,14 +43,14 @@ export default function App({offers, reviews, citiesList}: AppProps): JSX.Elemen
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <FavoritePage offers={offers} />
+                <FavoritePage />
               </PrivateRoute>
             }
 
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offers={offers} reviews={reviews} />}
+            element={<OfferPage />}
           />
           <Route
             path="*"

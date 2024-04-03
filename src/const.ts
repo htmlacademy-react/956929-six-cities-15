@@ -68,6 +68,8 @@ export const URL_MARKER_CURRENT = './public/img/pin-active.svg';
 
 export const MAX_NEAR_SHOW = 3;
 
+export const MAX_REVIEWS_COUNT = 10;
+
 export const citiesList = Object.values(LOCATIONS);
 
 export const DEFAULT_CITY = LOCATIONS.Paris;
@@ -98,3 +100,21 @@ export enum TitleSpace {
   Error = 'ERROR'
 }
 
+export enum FavoriteUpdate {
+  Offers = 'UpdateOffers',
+  Offer = 'UpdateOffer',
+  Favorites = 'UpdateFavorites',
+  NearOffers = 'UpdateNearOffers',
+}
+
+export const ReviewRating = [
+  { value: '5', title: 'perfect' },
+  { value: '4', title: 'good' },
+  { value: '3', title: 'not bad' },
+  { value: '2', title: 'badly' },
+  { value: '1', title: 'terribly' },
+];
+
+export const MAX_REVIEWS_SYMBOLS = 300;
+
+export const MIN_REVIEWS_SYMBOLS = 50;
