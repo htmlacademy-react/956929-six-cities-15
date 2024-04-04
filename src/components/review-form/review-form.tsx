@@ -24,7 +24,6 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
 
   const handleFieldChange: TChangeHandler = (evt) => {
     const target = evt.target as HTMLInputElement | HTMLTextAreaElement;
-
     const { name, value } = target;
     setReview({ ...review, [name]: value });
   };
@@ -49,6 +48,7 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
     }
     setRating(0);
     setComment('');
+
   };
 
   return(
@@ -60,7 +60,6 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-
         {ReviewRating.map(({value, title }) => (
           <Fragment key={value}>
             <input
@@ -82,15 +81,16 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
             </label>
           </Fragment>
         ))}
-
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={review.review}
         onChange={handleFieldChange}
       >
+
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">To submit review please make sure to set
