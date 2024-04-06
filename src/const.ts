@@ -132,3 +132,10 @@ export const ReviewRating = [
 export const MAX_REVIEWS_SYMBOLS = 300;
 
 export const MIN_REVIEWS_SYMBOLS = 50;
+
+export enum FavoritesUpdate {
+  Offers = 'UpdateOffers',
+  Offer = 'UpdateOffer',
+  Favorites = 'UpdateFavorites',
+  NearOffers = 'UpdateNearOffers',
+}

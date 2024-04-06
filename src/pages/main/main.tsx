@@ -7,6 +7,7 @@ import OffersCardList from '../../components/offers-card-list/offers-card-list';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import LocationList from '../../components/location-list/location-list';
+import Spinner from '../../components/spinner/spinner';
 import MainEmpty from '../main-empty/main-empty';
 import { useAppSelector } from '../../hooks/index';
 import { getCityActive, getCity, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/offers-process.selectors';
@@ -38,7 +39,7 @@ export default function MainPage({citiesList}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
 
         <LocationList cities = {citiesList} />
-
+        {offersIsLoading && <Spinner />}
 
         {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}
         {!offersIsLoading && (

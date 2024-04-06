@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
 import { Offer } from '../../types/offer';
 import { countStars } from '../../utils/utils';
-
+import { useFavorites } from '../../hooks/use-favorites';
+import { FavoritesUpdate } from '../../const';
 
 type PlaceCardProps = {
   className: 'cities' | 'near-places';
   offerCard: Offer;
   setCardOfferHoverId?(id: string | null): void;
+  favoritesUpdate: FavoritesUpdate;
 }
 
 
-export default function OfferCard({className, offerCard, setCardOfferHoverId}:PlaceCardProps): JSX.Element {
+export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdate}:PlaceCardProps): JSX.Element {
+
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
-  const [isFavoriteCard, setIsFavoriteCard] = useState(isFavorite);
 
   const handleMouseOver = () => {
     setCardOfferHoverId?.(id);
@@ -23,6 +23,13 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId}:Pl
   const handleMouseOut = () => {
     setCardOfferHoverId?.(null);
   };
+
+  const currentStatus = offerCard.isFavorite ? 0 : 1;
+  const onChangeFavorites = useFavorites(
+    String(offerCard.id),
+    currentStatus,
+    favoritesUpdate
+  );
 
   return (
     <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
@@ -49,8 +56,8 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId}:Pl
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <button onClick={() => setIsFavoriteCard(!isFavoriteCard)}
-            className={`place-card__bookmark-button button ${isFavoriteCard ? 'place-card__bookmark-button--active' : '' }`} type="button"
+          <button onClick={onChangeFavorites}
+            className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : '' }`} type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />

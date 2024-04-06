@@ -1,12 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-// import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import Spinner from '../../components/spinner/spinner';
 import FavoritesCardList from '../../components/favorities-card-list/favorities-card-list';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
+import { getFavoritesIsNotFound, getFavoritesIsLoading } from '../../store/favorites-process/favorites-process.selectors';
 
 export default function FavoritePage(): JSX.Element {
-  const favoritesIsNotFound = useAppSelector((state) => state.favoritesIsNotFound);
+  const favoritesIsNotFound = useAppSelector(getFavoritesIsNotFound);
+  const favoritesIsLoading = useAppSelector(getFavoritesIsLoading);
 
   return (
     <div className="page">
@@ -16,7 +19,7 @@ export default function FavoritePage(): JSX.Element {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {/* {(favoritesIsNotFound || !favoriteCards.length) ? ( */}
+          {favoritesIsLoading && <Spinner />}
           {(favoritesIsNotFound) ? (
             <FavoritesEmpty />
           ) : (

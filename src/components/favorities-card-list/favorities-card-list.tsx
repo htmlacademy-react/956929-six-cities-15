@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import FavoritesCard from '../../components/favorities-card/favorities-card';
-
+import { getFavorites } from '../../store/favorites-process/favorites-process.selectors';
 
 export default function FavoritesCardList(): JSX.Element {
-  const favoritesCardsList = useAppSelector((state)=>state.offers).filter((offer) => offer.isFavorite === true);
+  const favoritesCardsList = useAppSelector(getFavorites);
 
   return (
     <section className="favorites">
