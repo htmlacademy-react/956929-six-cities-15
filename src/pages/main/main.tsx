@@ -12,11 +12,7 @@ import MainEmpty from '../main-empty/main-empty';
 import { useAppSelector } from '../../hooks/index';
 import { getCityActive, getCity, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/offers-process.selectors';
 
-type MainProps = {
-  citiesList: string[];
-};
-
-export default function MainPage({citiesList}: MainProps): JSX.Element {
+export default function MainPage(): JSX.Element {
   const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
   const cityActive = useAppSelector(getCityActive);
   const offersActive = useAppSelector(getOffers);
@@ -38,7 +34,7 @@ export default function MainPage({citiesList}: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <LocationList cities = {citiesList} />
+        <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}
 
         {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}

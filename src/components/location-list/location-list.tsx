@@ -1,13 +1,13 @@
-import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import { getCityActive } from '../../store/offers-process/offers-process.selectors';
+import { Link } from 'react-router-dom';
+import {useAppDispatch} from '../../hooks/index';
 import { setCityActive, setChangeMap, getOffers } from '../../store/offers-process/offers-process.slice';
+import { citiesList, AppRoute } from '../../const';
 
 type LocationListProps = {
-  cities: string[];
+  cityActive: string;
 }
 
-export default function LocationList({cities}: LocationListProps): JSX.Element {
-  const cityActive = useAppSelector(getCityActive);
+export default function LocationList({cityActive }: LocationListProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   function changeCity (city:string) {
@@ -20,18 +20,18 @@ export default function LocationList({cities}: LocationListProps): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) => (
+          {citiesList.map((city) => (
             <li key={city} className="locations__item">
-              <a className={`locations__item-link tabs__item ${city === cityActive ? 'tabs__item--active' : ''}`}
+              <Link className={`locations__item-link tabs__item ${city === cityActive ? 'tabs__item--active' : ''}`}
                 onClick={(evt)=>{
                   evt.preventDefault();
                   changeCity(city);
                 }}
                 role="button"
-                href="#"
+                to={AppRoute.Main}
               >
                 <span>{city}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
