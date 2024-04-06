@@ -1,4 +1,4 @@
-import Logo from './logo';
+import Logo from '../logo/logo';
 import Login from '../login/login';
 
 export default function Header(): JSX.Element {
