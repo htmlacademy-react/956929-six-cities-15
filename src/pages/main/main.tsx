@@ -18,25 +18,19 @@ export default function MainPage(): JSX.Element {
   const offersActive = useAppSelector(getOffers);
   const cityMapActive = useAppSelector(getCity);
   const placesCount = offersActive.length;
-
   const offersIsLoading = useAppSelector(getOffersIsLoading);
   const offersIsNotFound = useAppSelector(getOffersIsNotFound);
 
   return (
     <div className="page page--gray page--main">
-
       <Helmet>
         <title>6 cities</title>
       </Helmet>
-
       <Header />
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-
         <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}
-
         {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}
         {!offersIsLoading && (
           <div className="cities">
@@ -45,10 +39,8 @@ export default function MainPage(): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{placesCount} places to stay in {cityActive}</b>
-
                   <Sort />
                   <OffersCardList offersList={offersActive} setCardOfferHoverId={setCardOfferHoverId} />
-
                 </section>
                 <div className="cities__right-section">
                   <Map mapClassName={'cities'} offers={offersActive} city={cityMapActive} cardActiveId={cardOfferHoverId} />
@@ -62,7 +54,4 @@ export default function MainPage(): JSX.Element {
       </main>
     </div>
   );
-
 }
-
-
