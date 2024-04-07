@@ -11,7 +11,6 @@ type PlaceCardProps = {
   favoritesUpdate: FavoritesUpdate;
 }
 
-
 export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdate}:PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
 
@@ -55,7 +54,6 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
           <button onClick={onChangeFavorites}
             className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : '' }`} type="button"
           >
