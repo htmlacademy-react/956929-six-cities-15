@@ -16,7 +16,7 @@ export function sortOffers(sortType: SortType, offers: Offer[]) {
   }
 }
 
-export function upperCaseFirst(text: string) {
+export function uppercaseFirst(text: string) {
   if (!text) {
     return text;
   }

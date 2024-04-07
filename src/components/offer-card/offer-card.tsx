@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Offer } from '../../types/offer';
-import { countStars, upperCaseFirst } from '../../utils/utils';
+import { countStars, uppercaseFirst } from '../../utils/utils';
 import { useUpdateFavorites } from '../../hooks/use-update-favorites';
 import { FavoritesUpdateSource } from '../../const';
 
@@ -79,7 +79,7 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{upperCaseFirst(type)}</p>
+        <p className="place-card__type">{uppercaseFirst(type)}</p>
       </div>
     </article>
   );
