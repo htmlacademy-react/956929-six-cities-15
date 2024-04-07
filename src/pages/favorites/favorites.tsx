@@ -8,8 +8,8 @@ import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import { getFavoritesIsNotFound, getFavoritesIsLoading } from '../../store/favorites-process/favorites-process.selectors';
 
 export default function FavoritePage(): JSX.Element {
-  const favoritesIsNotFound = useAppSelector(getFavoritesIsNotFound);
-  const favoritesIsLoading = useAppSelector(getFavoritesIsLoading);
+  const isLoading = useAppSelector(getFavoritesIsLoading);
+  const notFound = useAppSelector(getFavoritesIsNotFound);
 
   return (
     <div className="page">
@@ -19,8 +19,8 @@ export default function FavoritePage(): JSX.Element {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {favoritesIsLoading && <Spinner />}
-          {(favoritesIsNotFound) ? (
+          {isLoading && <Spinner />}
+          {(notFound) ? (
             <FavoritesEmpty />
           ) : (
             <FavoritesCardList />
