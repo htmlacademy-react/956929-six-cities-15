@@ -2,12 +2,12 @@ import { useNavigate } from 'react-router';
 import { getAuthorizationStatus } from '../store/user-process/user-process.selectors';
 import { setFavoritesAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from './index';
-import { AppRoute, AuthorizationStatus, FavoritesUpdate} from '../const';
+import { AppRoute, AuthorizationStatus, FavoritesUpdateSource} from '../const';
 
-export const useFavorites = (
+export const useUpdateFavorites = (
   offerId: string,
   status: number,
-  favoritesUpdate: FavoritesUpdate
+  favoritesUpdateSource: FavoritesUpdateSource
 ) => {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -18,7 +18,7 @@ export const useFavorites = (
       navigate(AppRoute.Login);
     }
 
-    dispatch(setFavoritesAction({ offerId, status, favoritesUpdate }));
+    dispatch(setFavoritesAction({ offerId, status, favoritesUpdateSource }));
   }
 
   return onChangeFavorites;

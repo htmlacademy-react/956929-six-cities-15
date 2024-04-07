@@ -6,8 +6,4 @@ export type User = {
     isPro: boolean;
 }
 
-export type UserLogin = UserData & {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+export type UserLogin = UserData & User;

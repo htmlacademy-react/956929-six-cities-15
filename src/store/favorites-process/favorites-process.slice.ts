@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TitleSpace } from '../../const';
-import { FavoritesProcess } from '../../types/state';
+import { FavoritesStatus } from '../../types/state';
 import { fetchFavoritesAction, setFavoritesAction } from '../api-actions';
 
-const initialState: FavoritesProcess = {
+const initialState: FavoritesStatus = {
   favorites: [],
   favoritesIsLoading: false,
   favoritesIsNotFound: false,

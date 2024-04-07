@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { Offer } from '../../types/offer';
-import { countStars, ucFirst } from '../../utils/utils';
-import { useFavorites } from '../../hooks/use-favorites';
-import { FavoritesUpdate } from '../../const';
+import { countStars, upperCaseFirst } from '../../utils/utils';
+import { useUpdateFavorites } from '../../hooks/use-update-favorites';
+import { FavoritesUpdateSource } from '../../const';
 
 type PlaceCardProps = {
   className: 'cities' | 'near-places';
   offerCard: Offer;
   setCardOfferHoverId?(id: string | null): void;
-  favoritesUpdate: FavoritesUpdate;
+  favoritesUpdateSource: FavoritesUpdateSource;
 }
 
-export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdate}:PlaceCardProps): JSX.Element {
+export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdateSource}:PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
 
   const handleMouseOver = () => {
@@ -24,10 +25,10 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
 
   const currentStatus = offerCard.isFavorite ? 0 : 1;
 
-  const onChangeFavorites = useFavorites(
+  const onChangeFavorites = useUpdateFavorites(
     String(offerCard.id),
     currentStatus,
-    favoritesUpdate
+    favoritesUpdateSource
   );
 
   return (
@@ -55,7 +56,10 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button onClick={onChangeFavorites}
-            className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : '' }`} type="button"
+            className={classNames('place-card__bookmark-button', 'button', {
+              'place-card__bookmark-button--active': isFavorite,
+            })}
+            type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
@@ -75,7 +79,7 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{ucFirst(type)}</p>
+        <p className="place-card__type">{upperCaseFirst(type)}</p>
       </div>
     </article>
   );

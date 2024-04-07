@@ -9,15 +9,15 @@ import NearPlaceCardList from '../../components/near-place-card-list/near-place-
 import Map from '../../components/map/map';
 import NotFound from '../not-found/not-found';
 import Spinner from '../../components/spinner/spinner';
-import { countStars, ucFirst } from '../../utils/utils';
+import { countStars, upperCaseFirst } from '../../utils/utils';
 import { MAX_NEAR_SHOW, } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getCity } from '../../store/offers-process/offers-process.selectors';
 import { getOffer, getOfferIsNotFound, getOfferIsLoading } from '../../store/offer-process/offer-process.selectors';
 import { getReviews } from '../../store/reviews-process/reviews-process.selectors';
 import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers-process/near-offers-process.selectors';
-import { useFavorites } from '../../hooks/use-favorites';
-import { FavoritesUpdate } from '../../const';
+import { useUpdateFavorites } from '../../hooks/use-update-favorites';
+import { FavoritesUpdateSource } from '../../const';
 
 export default function OfferPage(): JSX.Element {
   const cityMapActive = useAppSelector(getCity);
@@ -40,10 +40,10 @@ export default function OfferPage(): JSX.Element {
 
   const currentStatus = selectedOffer && selectedOffer.isFavorite ? 0 : 1;
 
-  const onChangeFavorites = useFavorites(
+  const onChangeFavorites = useUpdateFavorites(
     String(offerId),
     currentStatus,
-    FavoritesUpdate.Offer
+    FavoritesUpdateSource.Offer
   );
 
   if (offerIsNotFound) {
@@ -108,13 +108,13 @@ export default function OfferPage(): JSX.Element {
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {ucFirst(selectedOffer.type)}
+                    {upperCaseFirst(selectedOffer.type)}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {selectedOffer.bedrooms} {selectedOffer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                    {selectedOffer.bedrooms > 1 ? `${selectedOffer.bedrooms} Bedrooms` : `${selectedOffer.bedrooms} Bedroom`}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                  Max {selectedOffer.maxAdults} {selectedOffer.maxAdults > 1 ? 'adults' : 'adult'}
+                    {selectedOffer.maxAdults > 1 ? `Max ${selectedOffer.maxAdults} adults` : `Max ${selectedOffer.maxAdults} adult`}
                   </li>
                 </ul>
                 <div className="offer__price">

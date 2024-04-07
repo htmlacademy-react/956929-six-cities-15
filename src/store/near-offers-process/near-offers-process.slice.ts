@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TitleSpace } from '../../const';
-import { NearOffersProcess } from '../../types/state';
+import { NearOffersStatus } from '../../types/state';
 import { fetchNearOffersAction } from '../api-actions';
 import { Offer } from '../../types/offer';
 
-const initialState: NearOffersProcess = {
+const initialState: NearOffersStatus = {
   nearOffers: [],
   nearOffersIsLoading: false,
   nearOffersIsNotFound: false,

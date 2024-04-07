@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TitleSpace } from '../../const';
-import { OfferProcess } from '../../types/state';
+import { OfferStatus } from '../../types/state';
 import { fetchOfferAction } from '../api-actions';
 
-const initialState: OfferProcess = {
+const initialState: OfferStatus = {
   offer: null,
   offerIsLoading: false,
   offerIsNotFound: false,

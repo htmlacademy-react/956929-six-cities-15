@@ -14,7 +14,7 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
 
   const [review, setReview] = useState({
     rating: 0,
-    review: '',
+    review: ''
   });
 
   const isValidReviews =
@@ -28,16 +28,9 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
     setReview({ ...review, [name]: value });
   };
 
-  function setRating(value: number): void {
-    setReview({ ...review, rating: value });
-  }
-  function setComment(value: string): void {
-    setReview({ ...review, review: value });
-  }
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (offerId && !isValidReviews) {
+    if (offerId) {
       dispatch(
         submitCommentAction({
           id: offerId,
@@ -46,9 +39,8 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
         })
       );
     }
-    setRating(0);
-    setComment('');
 
+    setReview({rating: 0, review: ''});
   };
 
   return(
@@ -68,6 +60,7 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
               value={value}
               id={`${value}-stars`}
               type="radio"
+              checked={Number(review.rating) === Number(value)}
               onChange={handleFieldChange}
             />
             <label

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { Offer } from '../../types/offer';
-import { countStars, ucFirst } from '../../utils/utils';
-import { useFavorites } from '../../hooks/use-favorites';
-import { FavoritesUpdate } from '../../const';
+import { countStars, upperCaseFirst } from '../../utils/utils';
+import { useUpdateFavorites } from '../../hooks/use-update-favorites';
+import { FavoritesUpdateSource } from '../../const';
 
 type FavoritesCardProps = {
   card: Offer;
@@ -11,10 +12,10 @@ type FavoritesCardProps = {
 export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = card;
   const currentStatus = card && isFavorite ? 0 : 1;
-  const onChangeFavorites = useFavorites(
+  const onChangeFavorites = useUpdateFavorites(
     String(id),
     currentStatus,
-    FavoritesUpdate.Favorites
+    FavoritesUpdateSource.Favorites
   );
 
   return (
@@ -36,7 +37,9 @@ export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
           </div>
           <button
             onClick={onChangeFavorites}
-            className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : '' }`}
+            className={classNames('place-card__bookmark-button', 'button', {
+              'place-card__bookmark-button--active': isFavorite,
+            })}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -56,7 +59,7 @@ export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{ucFirst(type)}</p>
+        <p className="place-card__type">{upperCaseFirst(type)}</p>
       </div>
     </article>
   );

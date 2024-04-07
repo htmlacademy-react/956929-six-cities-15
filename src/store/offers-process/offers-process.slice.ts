@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TitleSpace, SortType, DEFAULT_CITY, DEFAULT_LOCATION, DEFAULT_SORT } from '../../const';
-import { OffersProcess } from '../../types/state';
+import { OffersStatus } from '../../types/state';
 import { fetchOffersAction } from '../api-actions';
 import { sortOffers } from '../../utils/utils';
 import { Offer } from '../../types/offer';
 
-const initialState: OffersProcess = {
+const initialState: OffersStatus = {
   cityActive: DEFAULT_CITY,
   city: DEFAULT_LOCATION,
   sortType: DEFAULT_SORT,

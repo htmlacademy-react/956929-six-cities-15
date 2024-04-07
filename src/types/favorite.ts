@@ -1,7 +1,7 @@
-import {FavoritesUpdate} from '../const';
+import {FavoritesUpdateSource} from '../const';
 
 export type FavoriteData = {
   offerId: string;
   status: number;
-  favoritesUpdate: FavoritesUpdate;
+  favoritesUpdateSource: FavoritesUpdateSource;
 };

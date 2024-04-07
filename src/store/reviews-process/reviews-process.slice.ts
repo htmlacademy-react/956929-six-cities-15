@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TitleSpace } from '../../const';
-import { ReviewsProcess } from '../../types/state';
+import { ReviewsStatus } from '../../types/state';
 import { fetchReviewsAction, submitCommentAction } from '../api-actions';
 
-const initialState: ReviewsProcess = {
+const initialState: ReviewsStatus = {
   reviews: [],
   reviewsIsLoading: false,
   reviewsIsNotFound: false

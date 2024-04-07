@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import classNames from 'classnames';
 import { AppRoute } from '../../const';
 import Header from '../../components/header/header';
 import OffersCardList from '../../components/offers-card-list/offers-card-list';
@@ -28,7 +29,11 @@ export default function MainPage(): JSX.Element {
         <title>6 cities</title>
       </Helmet>
       <Header />
-      <main className={`page__main page__main--index ${placesCount ? '' : 'page__main--index-empty'} `}>
+      <main
+        className={classNames('page__main', 'page__main--index', {
+          'page__main--index-empty': !placesCount,
+        })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}

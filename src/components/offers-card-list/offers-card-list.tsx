@@ -1,6 +1,6 @@
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
-import { FavoritesUpdate } from '../../const';
+import { FavoritesUpdateSource } from '../../const';
 
 type OffersCardListProps = {
     offersList: Offer[];
@@ -12,7 +12,7 @@ export default function OffersCardList({offersList, setCardOfferHoverId }:Offers
     <div className="cities__places-list places__list tabs__content">
 
       {offersList.map((offer) => (
-        <OfferCard key={offer.id} className={'cities'} offerCard={offer} setCardOfferHoverId={setCardOfferHoverId} favoritesUpdate={FavoritesUpdate.Offers} />
+        <OfferCard key={offer.id} className={'cities'} offerCard={offer} setCardOfferHoverId={setCardOfferHoverId} favoritesUpdateSource={FavoritesUpdateSource.Offers} />
       ))}
 
     </div>

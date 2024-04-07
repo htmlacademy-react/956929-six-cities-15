@@ -16,7 +16,7 @@ export function sortOffers(sortType: SortType, offers: Offer[]) {
   }
 }
 
-export function ucFirst(text: string) {
+export function upperCaseFirst(text: string) {
   if (!text) {
     return text;
   }
@@ -24,3 +24,7 @@ export function ucFirst(text: string) {
   return text[0].toUpperCase() + text.slice(1);
 }
 
+
+export function formatDate(date: string) {
+  return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date(date));
+}

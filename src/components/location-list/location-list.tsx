@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import {useAppDispatch} from '../../hooks/index';
 import { setCityActive, setChangeMap, getOffers } from '../../store/offers-process/offers-process.slice';
 import { citiesList, AppRoute } from '../../const';
@@ -22,7 +23,10 @@ export default function LocationList({cityActive }: LocationListProps): JSX.Elem
         <ul className="locations__list tabs__list">
           {citiesList.map((city) => (
             <li key={city} className="locations__item">
-              <Link className={`locations__item-link tabs__item ${city === cityActive ? 'tabs__item--active' : ''}`}
+              <Link
+                className={classNames('locations__item-link tabs__item', {
+                  'tabs__item--active': city === cityActive,
+                })}
                 onClick={(evt)=>{
                   evt.preventDefault();
                   changeCity(city);
