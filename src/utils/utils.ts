@@ -1,8 +1,7 @@
 import { Offer } from '../types/offer';
 import { SortType } from '../const';
 
-
-export const countStars = (width: number) => `${width * 20}%`;
+export const countStars = (width: number) => `${Math.round(width) * 20}%`;
 
 export function sortOffers(sortType: SortType, offers: Offer[]) {
   switch (sortType) {
@@ -16,3 +15,12 @@ export function sortOffers(sortType: SortType, offers: Offer[]) {
       return offers;
   }
 }
+
+export function ucFirst(text: string) {
+  if (!text) {
+    return text;
+  }
+
+  return text[0].toUpperCase() + text.slice(1);
+}
+

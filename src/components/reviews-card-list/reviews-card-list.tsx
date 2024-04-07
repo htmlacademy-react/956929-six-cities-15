@@ -15,7 +15,6 @@ export default function ReviewsCardList({reviewsList, offerId}: ReviewsCardListP
   const maxReviews = reviewsList.slice(0, Math.min(MAX_REVIEWS_COUNT, reviewsList.length))
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
-
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -30,4 +29,3 @@ export default function ReviewsCardList({reviewsList, offerId}: ReviewsCardListP
     </section>
   );
 }
-

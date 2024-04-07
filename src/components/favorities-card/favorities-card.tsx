@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
-import { countStars } from '../../utils/utils';
+import { countStars, ucFirst } from '../../utils/utils';
 import { useFavorites } from '../../hooks/use-favorites';
 import { FavoritesUpdate } from '../../const';
 
@@ -56,7 +56,7 @@ export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{ucFirst(type)}</p>
       </div>
     </article>
   );

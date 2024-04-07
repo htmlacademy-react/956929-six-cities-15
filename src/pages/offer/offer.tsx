@@ -9,7 +9,7 @@ import NearPlaceCardList from '../../components/near-place-card-list/near-place-
 import Map from '../../components/map/map';
 import NotFound from '../not-found/not-found';
 import Spinner from '../../components/spinner/spinner';
-import { countStars } from '../../utils/utils';
+import { countStars, ucFirst } from '../../utils/utils';
 import { MAX_NEAR_SHOW, } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getCity } from '../../store/offers-process/offers-process.selectors';
@@ -53,7 +53,6 @@ export default function OfferPage(): JSX.Element {
   if(selectedOffer) {
     nearOfferSelectedCard.push(selectedOffer);
   }
-
 
   return (
     <div className="page">
@@ -105,17 +104,17 @@ export default function OfferPage(): JSX.Element {
                     <span style={{width: `${countStars(selectedOffer.rating)}`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{selectedOffer.rating}</span>
+                  <span className="offer__rating-value rating__value">{Math.round(selectedOffer.rating)}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {selectedOffer.type}
+                    {ucFirst(selectedOffer.type)}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {selectedOffer.bedrooms} Bedrooms
+                    {selectedOffer.bedrooms} {selectedOffer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                  Max {selectedOffer.maxAdults} adults
+                  Max {selectedOffer.maxAdults} {selectedOffer.maxAdults > 1 ? 'adults' : 'adult'}
                   </li>
                 </ul>
                 <div className="offer__price">

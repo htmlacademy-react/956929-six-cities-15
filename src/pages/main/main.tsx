@@ -21,13 +21,14 @@ export default function MainPage(): JSX.Element {
   const offersIsLoading = useAppSelector(getOffersIsLoading);
   const offersIsNotFound = useAppSelector(getOffersIsNotFound);
 
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 cities</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${placesCount ? '' : 'page__main--index-empty'} `}>
         <h1 className="visually-hidden">Cities</h1>
         <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}
