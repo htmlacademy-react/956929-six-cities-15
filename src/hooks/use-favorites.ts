@@ -14,7 +14,6 @@ export const useFavorites = (
   const navigate = useNavigate();
 
   function onChangeFavorites() {
-
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
     }

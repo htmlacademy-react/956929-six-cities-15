@@ -14,11 +14,7 @@ import HistoryRouter from '../history-route/history-route';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { getOffersIsLoading } from '../../store/offers-process/offers-process.selectors';
 
-type AppProps = {
-  citiesList: string[];
-};
-
-export default function App({ citiesList}: AppProps): JSX.Element {
+export default function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getOffersIsLoading);
 
@@ -34,7 +30,7 @@ export default function App({ citiesList}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage citiesList={citiesList} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}

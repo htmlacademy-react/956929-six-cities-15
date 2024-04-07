@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { citiesList } from './const';
 import { store } from './store';
 import { checkAuthAction, fetchOffersAction, fetchFavoritesAction } from './store/api-actions';
 
@@ -20,9 +19,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App
-        citiesList={citiesList}
-      />
+      <App />
     </Provider>
   </React.StrictMode>
 );

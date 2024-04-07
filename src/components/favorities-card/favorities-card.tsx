@@ -17,7 +17,6 @@ export default function FavoritesCard({card}: FavoritesCardProps): JSX.Element {
     FavoritesUpdate.Favorites
   );
 
-
   return (
     <article className="favorites__card place-card">
       {isPremium === true &&

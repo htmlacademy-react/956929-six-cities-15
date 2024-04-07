@@ -13,7 +13,6 @@ type PlaceCardProps = {
 
 
 export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdate}:PlaceCardProps): JSX.Element {
-
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
 
   const handleMouseOver = () => {
@@ -25,6 +24,7 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId, fa
   };
 
   const currentStatus = offerCard.isFavorite ? 0 : 1;
+
   const onChangeFavorites = useFavorites(
     String(offerCard.id),
     currentStatus,
