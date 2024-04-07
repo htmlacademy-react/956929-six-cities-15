@@ -2,29 +2,18 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Offer } from '../types/offer';
-import { loadOffers, requireAuthorization, setOffersIsLoading, getOffers, setError } from './action';
-import { ApiRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { loadOffers, requireAuthorization, setOffersIsLoading, getOffers, redirectToRoute, setUser } from './action';
+import { ApiRoute, AuthorizationStatus, AppRoute } from '../const';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
-import { store } from '.';
+import { UserLogin } from '../types/user';
 
-export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
-
-export const fetchQuestionAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
 }>(
-  'data/fetchQuestions',
+  'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setOffersIsLoading(true));
 
@@ -58,9 +47,13 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data: { token } } = await api.post<UserData>(ApiRoute.Login, { email, password });
+    const {data} = await api.post<UserLogin>(ApiRoute.Login, {email, password});
+    const {token} = data;
+
     saveToken(token);
+    dispatch(setUser(data));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
@@ -74,5 +67,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(ApiRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );

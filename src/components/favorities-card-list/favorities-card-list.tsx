@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-
+import { AppRoute } from '../../const';
 import FavoritesCard from '../../components/favorities-card/favorities-card';
 import { Offer } from '../../types/offer';
+
 
 type PlacesOffersProps = {
   favoritiesOffers: Offer[];
@@ -16,7 +17,7 @@ export default function FavoritesCardList({favoritiesOffers, name}: PlacesOffers
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to='/'>
+          <Link className="locations__item-link" to={AppRoute.Main}>
             <span>{name}</span>
           </Link>
         </div>
