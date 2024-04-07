@@ -1,21 +1,19 @@
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {setCityActive, getOffers, setChangeMap} from '../../store/action';
-import {cityMap} from '../../const';
+import { getCityActive } from '../../store/offers-process/offers-process.selectors';
+import { setCityActive, setChangeMap, getOffers } from '../../store/offers-process/offers-process.slice';
 
-type LocationsListProps = {
+type LocationListProps = {
   cities: string[];
 }
 
-export default function LocationsList({cities}: LocationsListProps): JSX.Element {
-  const cityActive = useAppSelector((state) => state.cityActive);
+export default function LocationList({cities}: LocationListProps): JSX.Element {
+  const cityActive = useAppSelector(getCityActive);
   const dispatch = useAppDispatch();
 
   function changeCity (city:string) {
-    const [cityMapActive] = cityMap.filter((item) => item.title === city);
-
     dispatch(setCityActive(city));
     dispatch(getOffers());
-    dispatch(setChangeMap(cityMapActive));
+    dispatch(setChangeMap());
   }
 
   return (

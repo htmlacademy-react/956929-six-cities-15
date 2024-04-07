@@ -3,13 +3,13 @@ import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 
 import useMap from '../../hooks/use-map';
-import { CityMap } from '../../types/city-map';
+import { City } from '../../types/city';
 import { Offer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
-  mapСlassName: 'cities' | 'offer';
-  city: CityMap;
+  mapClassName: 'cities' | 'offer';
+  city: City;
   offers: Offer[];
   cardActiveId: string | null;
 };
@@ -26,7 +26,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [27, 39],
 });
 
-export default function Map({mapСlassName,city, offers, cardActiveId}: MapProps): JSX.Element {
+export default function Map({mapClassName, city, offers, cardActiveId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -49,12 +49,12 @@ export default function Map({mapСlassName,city, offers, cardActiveId}: MapProps
 
   useEffect(() => {
     if (map) {
-      map.setView([city.lat, city.lng], city.zoom);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
   }, [map, city]);
 
   return (
-    <section className={`${mapСlassName}__map map`} ref={mapRef}>
+    <section className={`${mapClassName}__map map`} ref={mapRef}>
     </section>
   );
 }

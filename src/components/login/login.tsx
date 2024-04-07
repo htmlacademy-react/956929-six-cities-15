@@ -2,11 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus, AppRoute } from '../../const';
+import { getAuthorizationStatus, getUser } from '../../store/user-process/user-process.selectors';
 
 export default function Login(): JSX.Element {
-  const authorizationStatusLogged = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatusLogged = useAppSelector(getAuthorizationStatus);
   const isLogged = authorizationStatusLogged === AuthorizationStatus.Auth;
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

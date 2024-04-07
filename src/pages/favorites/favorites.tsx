@@ -2,8 +2,11 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoritesCardList from '../../components/favorities-card-list/favorities-card-list';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 export default function FavoritePage(): JSX.Element {
+  const favoritesIsNotFound = useAppSelector((state) => state.favoritesIsNotFound);
+
   return (
     <div className="page">
       <Helmet>
@@ -12,10 +15,11 @@ export default function FavoritePage(): JSX.Element {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
+          {(favoritesIsNotFound) ? (
+            <FavoritesEmpty />
+          ) : (
             <FavoritesCardList />
-          </section>
+          )}
         </div>
       </main>
       <Footer />

@@ -9,18 +9,22 @@ import NearPlaceCardList from '../../components/near-place-card-list/near-place-
 import Map from '../../components/map/map';
 import NotFound from '../not-found/not-found';
 import { countStars } from '../../utils/utils';
-import { MAX_NEAR_SHOW } from '../../const';
+import { MAX_NEAR_SHOW, } from '../../const';
 import { useAppSelector } from '../../hooks/index';
+import { getCity } from '../../store/offers-process/offers-process.selectors';
+import { getOffer, getOfferIsNotFound } from '../../store/offer-process/offer-process.selectors';
+import { getReviews } from '../../store/reviews-process/reviews-process.selectors';
+import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers-process/near-offers-process.selectors';
 
 export default function OfferPage(): JSX.Element {
-  const cityMapActive = useAppSelector((state) => state.city);
+  const cityMapActive = useAppSelector(getCity);
   const params = useParams();
   const offerId = params.id;
-  const selectedOffer = useAppSelector((state) => state.offer);
-  const offerIsNotFound = useAppSelector((state) => state.offerIsNotFound);
-  const reviewsActive = useAppSelector((state) => state.reviews);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const nearOffersIsLoading = useAppSelector((state) => state.nearOffersIsLoading);
+  const selectedOffer = useAppSelector(getOffer);
+  const offerIsNotFound = useAppSelector(getOfferIsNotFound);
+  const reviewsActive = useAppSelector(getReviews);
+  const nearOffers = useAppSelector(getNearOffers);
+  const nearOffersIsLoading = useAppSelector(getNearOffersIsLoading);
   const activeNearOffers = nearOffers.slice(0, Math.min(MAX_NEAR_SHOW, nearOffers.length));
   const nearOfferSelectedCard = [...activeNearOffers];
 
@@ -130,7 +134,7 @@ export default function OfferPage(): JSX.Element {
               </div>
             </div>
 
-            <Map mapСlassName={'offer'} offers={nearOfferSelectedCard} city={cityMapActive} cardActiveId={selectedOffer.id} />
+            <Map mapClassName={'offer'} offers={nearOfferSelectedCard} city={cityMapActive} cardActiveId={selectedOffer.id} />
 
           </section>
           <div className="container">

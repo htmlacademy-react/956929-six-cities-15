@@ -1,12 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import Header from '../../components/header/header';
 import OffersCardList from '../../components/offers-card-list/offers-card-list';
 import Map from '../../components/map/map';
-import LocationsList from '../../components/location-list/location-list';
-import { useAppSelector } from '../../hooks/index';
 import Sort from '../../components/sort/sort';
-
+import LocationList from '../../components/location-list/location-list';
+import MainEmpty from '../main-empty/main-empty';
+import { useAppSelector } from '../../hooks/index';
+import { getCityActive, getCity, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/offers-process.selectors';
 
 type MainProps = {
   citiesList: string[];
@@ -14,11 +17,13 @@ type MainProps = {
 
 export default function MainPage({citiesList}: MainProps): JSX.Element {
   const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
-  const cityActive = useAppSelector((state) => state.cityActive);
-  const offersActive = useAppSelector((state) => state.offers);
-  const cityMapActive = useAppSelector((state) => state.city);
-  const filterCityOffers = offersActive.filter((offer) => offer.city.name === cityActive);
-  const placesCount = filterCityOffers.length;
+  const cityActive = useAppSelector(getCityActive);
+  const offersActive = useAppSelector(getOffers);
+  const cityMapActive = useAppSelector(getCity);
+  const placesCount = offersActive.length;
+
+  const offersIsLoading = useAppSelector(getOffersIsLoading);
+  const offersIsNotFound = useAppSelector(getOffersIsNotFound);
 
   return (
     <div className="page page--gray page--main">
@@ -32,23 +37,31 @@ export default function MainPage({citiesList}: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <LocationsList cities = {citiesList} />
+        <LocationList cities = {citiesList} />
 
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in {cityActive}</b>
 
-              <Sort />
-              <OffersCardList offersList={filterCityOffers} setCardOfferHoverId={setCardOfferHoverId} />
+        {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}
+        {!offersIsLoading && (
+          <div className="cities">
+            {placesCount ? (
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{placesCount} places to stay in {cityActive}</b>
 
-            </section>
-            <div className="cities__right-section">
-              <Map mapСlassName={'cities'} offers={filterCityOffers} city={cityMapActive} cardActiveId={cardOfferHoverId} />
-            </div>
+                  <Sort />
+                  <OffersCardList offersList={offersActive} setCardOfferHoverId={setCardOfferHoverId} />
+
+                </section>
+                <div className="cities__right-section">
+                  <Map mapClassName={'cities'} offers={offersActive} city={cityMapActive} cardActiveId={cardOfferHoverId} />
+                </div>
+              </div>
+            ) : (
+              <MainEmpty cityActive={cityActive} />
+            ) }
           </div>
-        </div>
+        )}
       </main>
     </div>
   );

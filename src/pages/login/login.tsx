@@ -2,7 +2,7 @@ import { useRef, FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import Logo from '../../components/header/logo';
+import Logo from '../../components/logo/logo';
 
 export default function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
