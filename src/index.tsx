@@ -4,8 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { offers } from './mocks/offers';
-import { reviews } from './mocks/reviews';
 import { citiesList } from './const';
 import { store } from './store';
 import { checkAuthAction, fetchOffersAction } from './store/api-actions';
@@ -22,8 +20,6 @@ root.render(
     <Provider store={store}>
       <ToastContainer />
       <App
-        offers = {offers}
-        reviews = {reviews}
         citiesList={citiesList}
       />
     </Provider>
