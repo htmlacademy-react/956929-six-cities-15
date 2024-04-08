@@ -113,14 +113,6 @@ export enum TitleSpace {
   Error = 'ERROR'
 }
 
-
-export enum FavoriteUpdate {
-  Offers = 'UpdateOffers',
-  Offer = 'UpdateOffer',
-  Favorites = 'UpdateFavorites',
-  NearOffers = 'UpdateNearOffers',
-}
-
 export const ReviewRating = [
   { value: '5', title: 'perfect' },
   { value: '4', title: 'good' },
@@ -132,3 +124,10 @@ export const ReviewRating = [
 export const MAX_REVIEWS_SYMBOLS = 300;
 
 export const MIN_REVIEWS_SYMBOLS = 50;
+
+export enum FavoritesUpdateSource {
+  Offers = 'UpdateOffers',
+  Offer = 'UpdateOffer',
+  Favorites = 'UpdateFavorites',
+  NearOffers = 'UpdateNearOffers',
+}

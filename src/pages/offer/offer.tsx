@@ -8,13 +8,16 @@ import ReviewsCardList from '../../components/reviews-card-list/reviews-card-lis
 import NearPlaceCardList from '../../components/near-place-card-list/near-place-card-list';
 import Map from '../../components/map/map';
 import NotFound from '../not-found/not-found';
-import { countStars } from '../../utils/utils';
+import Spinner from '../../components/spinner/spinner';
+import { countStars, uppercaseFirst } from '../../utils/utils';
 import { MAX_NEAR_SHOW, } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { getCity } from '../../store/offers-process/offers-process.selectors';
-import { getOffer, getOfferIsNotFound } from '../../store/offer-process/offer-process.selectors';
+import { getOffer, getOfferIsNotFound, getOfferIsLoading } from '../../store/offer-process/offer-process.selectors';
 import { getReviews } from '../../store/reviews-process/reviews-process.selectors';
 import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers-process/near-offers-process.selectors';
+import { useUpdateFavorites } from '../../hooks/use-update-favorites';
+import { FavoritesUpdateSource } from '../../const';
 
 export default function OfferPage(): JSX.Element {
   const cityMapActive = useAppSelector(getCity);
@@ -22,6 +25,7 @@ export default function OfferPage(): JSX.Element {
   const offerId = params.id;
   const selectedOffer = useAppSelector(getOffer);
   const offerIsNotFound = useAppSelector(getOfferIsNotFound);
+  const offerIsLoading = useAppSelector(getOfferIsLoading);
   const reviewsActive = useAppSelector(getReviews);
   const nearOffers = useAppSelector(getNearOffers);
   const nearOffersIsLoading = useAppSelector(getNearOffersIsLoading);
@@ -34,6 +38,14 @@ export default function OfferPage(): JSX.Element {
     store.dispatch(fetchNearOffersAction(offerId));
   }, [offerId]);
 
+  const currentStatus = selectedOffer && selectedOffer.isFavorite ? 0 : 1;
+
+  const onChangeFavorites = useUpdateFavorites(
+    String(offerId),
+    currentStatus,
+    FavoritesUpdateSource.Offer
+  );
+
   if (offerIsNotFound) {
     return (<NotFound />);
   }
@@ -42,7 +54,6 @@ export default function OfferPage(): JSX.Element {
     nearOfferSelectedCard.push(selectedOffer);
   }
 
-
   return (
     <div className="page">
       <Helmet>
@@ -50,8 +61,9 @@ export default function OfferPage(): JSX.Element {
       </Helmet>
 
       <Header/>
-      {selectedOffer &&
-        <main className="page__main page__main--offer">
+      <main className="page__main page__main--offer">
+        {offerIsLoading && <Spinner />}
+        {selectedOffer &&
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
@@ -76,7 +88,11 @@ export default function OfferPage(): JSX.Element {
                   <h1 className="offer__name">
                     {selectedOffer.title}
                   </h1>
-                  <button className={`offer__bookmark-button button ${selectedOffer.isFavorite && 'offer__bookmark-button--active' }`} type="button" >
+                  <button
+                    onClick={onChangeFavorites}
+                    className={`offer__bookmark-button button ${selectedOffer.isFavorite && 'offer__bookmark-button--active' }`}
+                    type="button"
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -88,17 +104,17 @@ export default function OfferPage(): JSX.Element {
                     <span style={{width: `${countStars(selectedOffer.rating)}`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{selectedOffer.rating}</span>
+                  <span className="offer__rating-value rating__value">{Math.round(selectedOffer.rating)}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
-                    {selectedOffer.type}
+                    {uppercaseFirst(selectedOffer.type)}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {selectedOffer.bedrooms} Bedrooms
+                    {selectedOffer.bedrooms > 1 ? `${selectedOffer.bedrooms} Bedrooms` : `${selectedOffer.bedrooms} Bedroom`}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                  Max {selectedOffer.maxAdults} adults
+                    {selectedOffer.maxAdults > 1 ? `Max ${selectedOffer.maxAdults} adults` : `Max ${selectedOffer.maxAdults} adult`}
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -136,20 +152,20 @@ export default function OfferPage(): JSX.Element {
 
             <Map mapClassName={'offer'} offers={nearOfferSelectedCard} city={cityMapActive} cardActiveId={selectedOffer.id} />
 
+          </section>}
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+
+              {!nearOffersIsLoading && (
+                <NearPlaceCardList offerList={activeNearOffers} />
+              )}
+
+            </div>
           </section>
-          <div className="container">
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-
-                {!nearOffersIsLoading && (
-                  <NearPlaceCardList offerList={activeNearOffers} />
-                )}
-
-              </div>
-            </section>
-          </div>
-        </main>}
+        </div>
+      </main>
     </div>
   );
 }

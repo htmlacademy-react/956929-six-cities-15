@@ -9,7 +9,13 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type OffersProcess = {
+export type OfferStatus = {
+  offer: Offer | null;
+  offerIsLoading: boolean;
+  offerIsNotFound: boolean;
+};
+
+export type OffersStatus = {
     cityActive: string;
     city: City;
     sortType: SortType;
@@ -19,25 +25,26 @@ export type OffersProcess = {
     offersIsNotFound: boolean;
   };
 
-export type OfferProcess = {
-    offer: Offer | null;
-    offerIsLoading: boolean;
-    offerIsNotFound: boolean;
-  };
 
-export type ReviewsProcess = {
+export type ReviewsStatus = {
     reviews: Review[];
     reviewsIsLoading: boolean;
     reviewsIsNotFound: boolean;
   };
 
-export type NearOffersProcess = {
+export type NearOffersStatus = {
     nearOffers: Offer[];
     nearOffersIsLoading: boolean;
     nearOffersIsNotFound: boolean;
   };
 
-export type UserProcess = {
+export type UserStatus = {
     user: UserLogin | null;
     authorizationStatus: AuthorizationStatus;
+  };
+
+export type FavoritesStatus = {
+    favorites: Offer[];
+    favoritesIsLoading: boolean;
+    favoritesIsNotFound: boolean;
   };

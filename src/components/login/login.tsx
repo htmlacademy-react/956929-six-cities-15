@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import { getAuthorizationStatus, getUser } from '../../store/user-process/user-process.selectors';
+import { getFavorites } from '../../store/favorites-process/favorites-process.selectors';
 
 export default function Login(): JSX.Element {
   const authorizationStatusLogged = useAppSelector(getAuthorizationStatus);
@@ -11,6 +12,8 @@ export default function Login(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const favoritesLength = useAppSelector(getFavorites).length;
 
   const handleClick = () => {
     dispatch(logoutAction());
@@ -27,7 +30,7 @@ export default function Login(): JSX.Element {
               <div className="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span className="header__user-name user__name">{user?.email}</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favoritesLength}</span>
             </Link>
           </li>
           <li className="header__nav-item">

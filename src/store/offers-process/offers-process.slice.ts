@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TitleSpace, SortType, DEFAULT_CITY, DEFAULT_LOCATION, DEFAULT_SORT } from '../../const';
-import { OffersProcess } from '../../types/state';
+import { OffersStatus } from '../../types/state';
 import { fetchOffersAction } from '../api-actions';
 import { sortOffers } from '../../utils/utils';
 import { Offer } from '../../types/offer';
 
-const initialState: OffersProcess = {
+const initialState: OffersStatus = {
   cityActive: DEFAULT_CITY,
   city: DEFAULT_LOCATION,
   sortType: DEFAULT_SORT,
@@ -37,16 +37,14 @@ export const offers = createSlice({
       state.city = cityMapActive;
     },
 
-    getSortType(state, action: PayloadAction<SortType>) {
+    setSortType(state, action: PayloadAction<SortType>) {
       state.sortType = action.payload;
     },
 
-    setSortedOffers(state) {
-      state.offers = sortOffers(state.sortType, state.offers);
-    },
+    setFavoritesOffers(state, action: PayloadAction<Offer>) {
+      const favoriteOffer = action.payload;
 
-    loadOffers(state, action) {
-      state.offers = action.payload;
+      state.offers = state.offers.map((item: Offer) => item.id === favoriteOffer.id ? favoriteOffer : item);
     },
   },
 
@@ -71,4 +69,4 @@ export const offers = createSlice({
   },
 });
 
-export const { getOffers, setCityActive, getSortType, setSortedOffers, setChangeMap } = offers.actions;
+export const { getOffers, setCityActive, setSortType, setChangeMap, setFavoritesOffers } = offers.actions;

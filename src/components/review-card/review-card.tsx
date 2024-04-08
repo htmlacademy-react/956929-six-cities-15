@@ -1,5 +1,5 @@
 import { Review } from '../../types/review';
-import { countStars } from '../../utils/utils';
+import { countStars, formatDate } from '../../utils/utils';
 
 type ReviewProps = {
     reviewCard: Review;
@@ -8,7 +8,6 @@ type ReviewProps = {
 export default function ReviewCard({reviewCard}: ReviewProps):JSX.Element {
   const { user, comment, rating, date } = reviewCard;
   const { name, avatarUrl } = user;
-  const dueDate = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date(date.split('T')[0]));
 
   return (
     <div>
@@ -33,7 +32,7 @@ export default function ReviewCard({reviewCard}: ReviewProps):JSX.Element {
               {comment}
             </p>
             <time className="reviews__time" dateTime={date}>
-              {dueDate}
+              {formatDate(date)}
             </time>
           </div>
         </li>

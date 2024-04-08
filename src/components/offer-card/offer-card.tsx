@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
+import classNames from 'classnames';
 import { Offer } from '../../types/offer';
-import { countStars } from '../../utils/utils';
-
+import { countStars, uppercaseFirst } from '../../utils/utils';
+import { useUpdateFavorites } from '../../hooks/use-update-favorites';
+import { FavoritesUpdateSource } from '../../const';
 
 type PlaceCardProps = {
   className: 'cities' | 'near-places';
   offerCard: Offer;
   setCardOfferHoverId?(id: string | null): void;
+  favoritesUpdateSource: FavoritesUpdateSource;
 }
 
-
-export default function OfferCard({className, offerCard, setCardOfferHoverId}:PlaceCardProps): JSX.Element {
+export default function OfferCard({className, offerCard, setCardOfferHoverId, favoritesUpdateSource}:PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = offerCard;
-  const [isFavoriteCard, setIsFavoriteCard] = useState(isFavorite);
 
   const handleMouseOver = () => {
     setCardOfferHoverId?.(id);
@@ -23,6 +22,14 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId}:Pl
   const handleMouseOut = () => {
     setCardOfferHoverId?.(null);
   };
+
+  const currentStatus = offerCard.isFavorite ? 0 : 1;
+
+  const onChangeFavorites = useUpdateFavorites(
+    String(offerCard.id),
+    currentStatus,
+    favoritesUpdateSource
+  );
 
   return (
     <article className={`${className}__card place-card`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
@@ -48,9 +55,11 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId}:Pl
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
-          <button onClick={() => setIsFavoriteCard(!isFavoriteCard)}
-            className={`place-card__bookmark-button button ${isFavoriteCard ? 'place-card__bookmark-button--active' : '' }`} type="button"
+          <button onClick={onChangeFavorites}
+            className={classNames('place-card__bookmark-button', 'button', {
+              'place-card__bookmark-button--active': isFavorite,
+            })}
+            type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
@@ -70,7 +79,7 @@ export default function OfferCard({className, offerCard, setCardOfferHoverId}:Pl
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{uppercaseFirst(type)}</p>
       </div>
     </article>
   );

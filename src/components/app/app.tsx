@@ -11,15 +11,12 @@ import Spinner from '../spinner/spinner';
 import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { getOffersIsLoading } from '../../store/offers-process/offers-process.selectors';
 
-
-type AppProps = {
-  citiesList: string[];
-};
-
-export default function App({ citiesList}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.offersIsLoading);
+export default function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersIsLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
@@ -33,7 +30,7 @@ export default function App({ citiesList}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage citiesList={citiesList} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}
