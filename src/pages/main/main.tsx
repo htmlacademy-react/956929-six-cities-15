@@ -34,9 +34,9 @@ export default function MainPage(): JSX.Element {
           'page__main--index-empty': !placesCount,
         })}
       >
-        <h1 className="visually-hidden">Cities</h1>
         <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}
+        <h1 className="visually-hidden">Cities</h1>
         {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}
         {!offersIsLoading && (
           <div className="cities">
@@ -44,7 +44,7 @@ export default function MainPage(): JSX.Element {
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{placesCount} places to stay in {cityActive}</b>
+                  <b className="places__found">{placesCount > 1 ? `${placesCount} places` : `${placesCount} place`} to stay in {cityActive}</b>
                   <Sort />
                   <OffersCardList offersList={offersActive} setCardOfferHoverId={setCardOfferHoverId} />
                 </section>

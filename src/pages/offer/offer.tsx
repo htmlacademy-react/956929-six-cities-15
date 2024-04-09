@@ -17,7 +17,7 @@ import { getOffer, getOfferIsNotFound, getOfferIsLoading } from '../../store/off
 import { getReviews } from '../../store/reviews-process/reviews-process.selectors';
 import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers-process/near-offers-process.selectors';
 import { useUpdateFavorites } from '../../hooks/use-update-favorites';
-import { FavoritesUpdateSource } from '../../const';
+import { FavoritesUpdateSource, MAX_IMAGE_COUNT } from '../../const';
 
 export default function OfferPage(): JSX.Element {
   const cityMapActive = useAppSelector(getCity);
@@ -67,14 +67,16 @@ export default function OfferPage(): JSX.Element {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                {selectedOffer.images.map((url, count) => {
-                  const keyValue = `${count}-${url}`;
-                  return (
-                    <div key={keyValue} className="offer__image-wrapper">
-                      <img className="offer__image" src={url} alt="Photo studio" />
-                    </div>
-                  );
-                })}
+                {selectedOffer.images?.length > 0 &&
+                  selectedOffer.images.slice(0, Math.min(MAX_IMAGE_COUNT, selectedOffer.images.length))
+                    .map((url, count) => {
+                      const keyValue = `${count}-${url}`;
+                      return (
+                        <div key={keyValue} className="offer__image-wrapper">
+                          <img className="offer__image" src={url} alt="Photo studio" />
+                        </div>
+                      );
+                    })}
               </div>
             </div>
             <div className="offer__container container">
@@ -104,7 +106,7 @@ export default function OfferPage(): JSX.Element {
                     <span style={{width: `${countStars(selectedOffer.rating)}`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="offer__rating-value rating__value">{Math.round(selectedOffer.rating)}</span>
+                  <span className="offer__rating-value rating__value">{selectedOffer.rating}</span>
                 </div>
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">
@@ -131,13 +133,19 @@ export default function OfferPage(): JSX.Element {
                   <h2 className="offer__host-title">Meet the host</h2>
                   {selectedOffer.host &&
                     <div className="offer__host-user user">
-                      <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                        <img className="offer__avatar user__avatar" src={selectedOffer.host?.avatarUrl}
-                          width="74" height="74" alt="Host avatar"
-                        />
-                      </div>
-                      <span className="offer__user-name">{selectedOffer.host?.hostName}</span>
-                      <span className="offer__user-status">{selectedOffer.host?.isPro && 'Pro'}</span>
+                      {selectedOffer.host?.avatarUrl && (
+                        <div className={`offer__avatar-wrapper ${selectedOffer.host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
+                          <img className="offer__avatar user__avatar" src={selectedOffer.host?.avatarUrl}
+                            width="74" height="74" alt="Host avatar"
+                          />
+                        </div>
+                      )}
+                      {selectedOffer.host?.name && (
+                        <span className="offer__user-name">{selectedOffer.host.name}</span>
+                      )}
+                      {selectedOffer.host?.isPro && (
+                        <span className="offer__user-status">Pro</span>
+                      )}
                     </div>}
                   <div className="offer__description">
                     <p className="offer__text">

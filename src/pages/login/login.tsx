@@ -1,33 +1,74 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { useNavigate, Link } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus, citiesList } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getRandomInteger } from '../../utils/utils';
+import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { setCityActive, getOffers, setChangeMap } from '../../store/offers-process/offers-process.slice';
+
+const validateEmail = (email: string): boolean =>
+  /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(email);
+
+const validatePassword = (password: string): boolean =>
+  /^[A-za-z0-9_]+[A-za-z0-9_]{1,}$/.test(password);
+
+const validate = (formData: AuthData): boolean => {
+  if (!validateEmail(formData.email) || !validatePassword(formData.password)) {
+    return false;
+  }
+  return true;
+};
 
 export default function LoginPage(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    return (
-      <Navigate to={AppRoute.Main} />
-    );
-  }
+  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
-        login: loginRef.current.value,
+        email: loginRef.current.value,
         password: passwordRef.current.value
       }));
     }
   };
+
+  const cityButton = citiesList[getRandomInteger(0, citiesList.length - 1)];
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  function onCityButton(city: string) {
+    dispatch(setCityActive(city));
+    dispatch(getOffers());
+    dispatch(setChangeMap());
+  }
+
+  const [isSubmitButtonOk, setIsSubmitButtonOk] = useState(false);
+  const [formData, setFormData] = useState<AuthData>({
+    email: '',
+    password: '',
+  });
+
+  const handleTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+    setFormData({ ...formData, [name]: value });
+    if (validate({ ...formData, [name]: value })) {
+      setIsSubmitButtonOk(true);
+    } else {
+      setIsSubmitButtonOk(false);
+    }
+  };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  }, [authorizationStatus, navigate]);
 
   return (
     <div className="page page--gray page--login">
@@ -56,6 +97,8 @@ export default function LoginPage(): JSX.Element {
                   placeholder="Email"
                   required
                   ref={loginRef}
+                  onChange={handleTextChange}
+                  value={formData.email}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -67,16 +110,29 @@ export default function LoginPage(): JSX.Element {
                   placeholder="Password"
                   required
                   ref={passwordRef}
+                  onChange={handleTextChange}
+                  value={formData.password}
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+                disabled={!isSubmitButtonOk}
+              >
+                Sign in
+              </button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                onClick={() => onCityButton(cityButton)} to={AppRoute.Main}
+              >
+                <span>
+                  {cityButton}
+                </span>
+              </Link>
             </div>
           </section>
         </div>

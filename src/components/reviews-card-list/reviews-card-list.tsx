@@ -18,7 +18,7 @@ export default function ReviewsCardList({reviewsList, offerId}: ReviewsCardListP
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-          Reviews &middot; <span className="reviews__amount">{maxReviews.length}</span>
+          Reviews &middot; <span className="reviews__amount">{reviewsList.length}</span>
       </h2>
       { maxReviews.map((review) => (
         <ReviewCard key={review.id} reviewCard={review}/>
