@@ -11,7 +11,7 @@ type MapProps = {
   mapClassName: 'cities' | 'offer';
   city: City;
   offers: Offer[];
-  cardActiveId: string | null;
+  cardActiveId?: Offer['id'] | null;
 };
 
 const defaultCustomIcon = leaflet.icon({

@@ -67,11 +67,20 @@ export const URL_MARKER_DEFAULT = './public/img/pin.svg';
 
 export const URL_MARKER_CURRENT = './public/img/pin-active.svg';
 
+export const MAX_IMAGE_COUNT = 6;
+
 export const MAX_NEAR_SHOW = 3;
 
 export const MAX_REVIEWS_COUNT = 10;
 
-export const citiesList = Object.values(LOCATIONS);
+export const citiesList = [
+  LOCATIONS.Paris,
+  LOCATIONS.Cologne,
+  LOCATIONS.Brussels,
+  LOCATIONS.Amsterdam,
+  LOCATIONS.Hamburg,
+  LOCATIONS.Dusseldorf
+];
 
 export const DEFAULT_CITY = LOCATIONS.Paris;
 
