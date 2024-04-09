@@ -1,9 +1,8 @@
 import { useRef, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, citiesList } from '../../const';
+import { AppRoute, AuthorizationStatus, LOCATIONS } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getRandomInteger } from '../../utils/utils';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
@@ -28,6 +27,15 @@ export default function LoginPage(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cityButton = LOCATIONS.Paris;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  const [isSubmitButton, setIsSubmitButton] = useState(false);
+  const [formData, setFormData] = useState<AuthData>({
+    email: '',
+    password: '',
+  });
+
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -39,28 +47,19 @@ export default function LoginPage(): JSX.Element {
     }
   };
 
-  const cityButton = citiesList[getRandomInteger(0, citiesList.length - 1)];
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
   function onCityButton(city: string) {
     dispatch(setCityActive(city));
     dispatch(getOffers());
     dispatch(setChangeMap());
   }
 
-  const [isSubmitButtonOk, setIsSubmitButtonOk] = useState(false);
-  const [formData, setFormData] = useState<AuthData>({
-    email: '',
-    password: '',
-  });
-
   const handleTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
     if (validate({ ...formData, [name]: value })) {
-      setIsSubmitButtonOk(true);
+      setIsSubmitButton(true);
     } else {
-      setIsSubmitButtonOk(false);
+      setIsSubmitButton(false);
     }
   };
 
@@ -117,7 +116,7 @@ export default function LoginPage(): JSX.Element {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                disabled={!isSubmitButtonOk}
+                disabled={!isSubmitButton}
               >
                 Sign in
               </button>

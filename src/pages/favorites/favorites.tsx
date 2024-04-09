@@ -20,7 +20,7 @@ export default function FavoritePage(): JSX.Element {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           {isLoading && <Spinner />}
-          {(notFound) ? (
+          {notFound ? (
             <FavoritesEmpty />
           ) : (
             <FavoritesCardList />

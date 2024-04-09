@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import FavoritesCard from '../../components/favorities-card/favorities-card';
 import { getFavorites } from '../../store/favorites-process/favorites-process.selectors';
+import { setCityActive, getOffers, setChangeMap } from '../../store/offers-process/offers-process.slice';
 
 export default function FavoritesCardList(): JSX.Element {
   const favoritesCardsList = useAppSelector(getFavorites);
   const currentOfferLocations = Array.from(new Set(favoritesCardsList.map((offer) => offer.city.name)));
+  const dispatch = useAppDispatch();
+
+  function onCityButton(city: string) {
+    dispatch(setCityActive(city));
+    dispatch(getOffers());
+    dispatch(setChangeMap());
+  }
 
   return (
     <section className="favorites">
@@ -17,7 +25,11 @@ export default function FavoritesCardList(): JSX.Element {
             <li className="favorites__locations-items" key={city}>
               <div className="favorites__locations locations locations--current">
                 <div className="locations__item">
-                  <Link className="locations__item-link" to={AppRoute.Main}>
+                  <Link
+                    className="locations__item-link"
+                    onClick={() => onCityButton(city)}
+                    to={AppRoute.Main}
+                  >
                     <span>{city}</span>
                   </Link>
                 </div>
