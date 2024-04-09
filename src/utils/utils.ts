@@ -28,5 +28,3 @@ export function uppercaseFirst(text: string) {
 export function formatDate(date: string) {
   return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date(date));
 }
-
-export const getRandomInteger = (min: number, max:number) => Math.floor(Math.random() * (max - min));
