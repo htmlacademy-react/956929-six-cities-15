@@ -11,7 +11,7 @@ import LocationList from '../../components/location-list/location-list';
 import Spinner from '../../components/spinner/spinner';
 import MainEmpty from '../main-empty/main-empty';
 import { useAppSelector } from '../../hooks/index';
-import { getCityActive, getCity, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/offers-process.selectors';
+import { getCityActive, getCity, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers/offers.selectors';
 
 export default function MainPage(): JSX.Element {
   const [cardOfferHoverId, setCardOfferHoverId] = useState<string | null>(null);
@@ -34,8 +34,9 @@ export default function MainPage(): JSX.Element {
           'page__main--index-empty': !placesCount,
         })}
       >
-        <LocationList cityActive={cityActive} />
         {offersIsLoading && <Spinner />}
+        <LocationList cityActive={cityActive} />
+
         <h1 className="visually-hidden">Cities</h1>
         {offersIsNotFound && <Navigate to={AppRoute.NotFound} />}
         {!offersIsLoading && (

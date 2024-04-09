@@ -3,7 +3,7 @@ import ReviewForm from '../review-form/review-form';
 import { Review } from '../../types/review';
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus, MAX_REVIEWS_COUNT } from '../../const';
-import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { getAuthorizationStatus } from '../../store/user/user.selectors';
 
 type ReviewsCardListProps = {
     reviewsList: Review[];

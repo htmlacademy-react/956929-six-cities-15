@@ -2,8 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus, AppRoute } from '../../const';
-import { getAuthorizationStatus, getUser } from '../../store/user-process/user-process.selectors';
-import { getFavorites } from '../../store/favorites-process/favorites-process.selectors';
+import { getAuthorizationStatus, getUser } from '../../store/user/user.selectors';
+import { getFavorites } from '../../store/favorites/favorites.selectors';
 
 export default function Login(): JSX.Element {
   const authorizationStatusLogged = useAppSelector(getAuthorizationStatus);
@@ -15,7 +15,7 @@ export default function Login(): JSX.Element {
 
   const favoritesLength = useAppSelector(getFavorites).length;
 
-  const handleClick = () => {
+  const handleLinkClick = () => {
     dispatch(logoutAction());
     navigate(AppRoute.Main);
   };
@@ -38,7 +38,7 @@ export default function Login(): JSX.Element {
               to={AppRoute.Main}
               onClick={(evt) => {
                 evt.preventDefault();
-                handleClick();
+                handleLinkClick();
               }}
             >
               <span className="header__signout">Sign out</span>

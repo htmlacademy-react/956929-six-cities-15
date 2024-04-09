@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { SortType } from '../../const';
-import { getSortType } from '../../store/offers-process/offers-process.selectors';
-import { setSortType, getOffers } from '../../store/offers-process/offers-process.slice';
+import { getSortType } from '../../store/offers/offers.selectors';
+import { setSortType, getOffers } from '../../store/offers/offers.slice';
 
 export default function Sort(): JSX.Element {
   const [opened, setOpened] = useState<boolean>(false);

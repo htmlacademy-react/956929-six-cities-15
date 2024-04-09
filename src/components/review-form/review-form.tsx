@@ -28,7 +28,7 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
     setReview({ ...review, [name]: value });
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (offerId) {
       dispatch(
@@ -48,7 +48,7 @@ export default function ReviewForm({ offerId }: ReviewFormProps):JSX.Element {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

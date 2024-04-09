@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { store } from '../../store';
 import { fetchOfferAction, fetchReviewsAction, fetchNearOffersAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import ReviewsCardList from '../../components/reviews-card-list/reviews-card-list';
@@ -11,11 +10,11 @@ import NotFound from '../not-found/not-found';
 import Spinner from '../../components/spinner/spinner';
 import { countStars, uppercaseFirst } from '../../utils/utils';
 import { MAX_NEAR_SHOW, } from '../../const';
-import { useAppSelector } from '../../hooks/index';
-import { getCity } from '../../store/offers-process/offers-process.selectors';
-import { getOffer, getOfferIsNotFound, getOfferIsLoading } from '../../store/offer-process/offer-process.selectors';
-import { getReviews } from '../../store/reviews-process/reviews-process.selectors';
-import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers-process/near-offers-process.selectors';
+import { useAppSelector, useAppDispatch } from '../../hooks/index';
+import { getCity } from '../../store/offers/offers.selectors';
+import { getOffer, getOfferIsNotFound, getOfferIsLoading } from '../../store/offer/offer.selectors';
+import { getReviews } from '../../store/reviews/reviews.selectors';
+import { getNearOffers, getNearOffersIsLoading } from '../../store/near-offers/near-offers.selectors';
 import { useUpdateFavorites } from '../../hooks/use-update-favorites';
 import { FavoritesUpdateSource, MAX_IMAGE_COUNT } from '../../const';
 
@@ -31,12 +30,13 @@ export default function OfferPage(): JSX.Element {
   const nearOffersIsLoading = useAppSelector(getNearOffersIsLoading);
   const activeNearOffers = nearOffers.slice(0, Math.min(MAX_NEAR_SHOW, nearOffers.length));
   const nearOfferSelectedCard = [...activeNearOffers];
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    store.dispatch(fetchOfferAction(offerId));
-    store.dispatch(fetchReviewsAction(offerId));
-    store.dispatch(fetchNearOffersAction(offerId));
-  }, [offerId]);
+    dispatch(fetchOfferAction(offerId));
+    dispatch(fetchReviewsAction(offerId));
+    dispatch(fetchNearOffersAction(offerId));
+  }, [offerId, dispatch]);
 
   const currentStatus = selectedOffer && selectedOffer.isFavorite ? 0 : 1;
 
