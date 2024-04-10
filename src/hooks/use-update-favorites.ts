@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { getAuthorizationStatus } from '../store/user-process/user-process.selectors';
+import { getAuthorizationStatus } from '../store/user/user.selectors';
 import { setFavoritesAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from './index';
 import { AppRoute, AuthorizationStatus, FavoritesUpdateSource} from '../const';

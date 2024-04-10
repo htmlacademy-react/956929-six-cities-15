@@ -1,13 +1,14 @@
 import { useRef, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, LOCATIONS } from '../../const';
+import { AppRoute, AuthorizationStatus, citiesList } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
-import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
-import { setCityActive, getOffers, setChangeMap } from '../../store/offers-process/offers-process.slice';
+import { getAuthorizationStatus } from '../../store/user/user.selectors';
+import { setCityActive, getOffers, setChangeMap } from '../../store/offers/offers.slice';
+import { getRandomInteger } from '../../utils/utils';
 
 const validateEmail = (email: string): boolean =>
   /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(email);
@@ -27,7 +28,7 @@ export default function LoginPage(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const cityButton = LOCATIONS.Paris;
+  const cityButton = citiesList[getRandomInteger(0, citiesList.length - 1)];
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const [isSubmitButton, setIsSubmitButton] = useState(false);
@@ -36,8 +37,7 @@ export default function LoginPage(): JSX.Element {
     password: '',
   });
 
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
@@ -86,7 +86,7 @@ export default function LoginPage(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
+            <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input

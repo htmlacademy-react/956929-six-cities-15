@@ -10,9 +10,9 @@ import { Review } from '../types/review';
 import { Comments } from '../types/comments';
 import { redirectToRoute } from './action';
 import { FavoriteData } from '../types/favorite';
-import { setFavoriteOffer } from './offer-process/offer-process.slice';
-import { setFavoritesOffers } from './offers-process/offers-process.slice';
-import { setFavoriteNearOffers } from './near-offers-process/near-offers-process.slice';
+import { setFavoriteOffer } from './offer/offer.slice';
+import { setFavoritesOffers } from './offers/offers.slice';
+import { setFavoriteNearOffers } from './near-offers/near-offers.slice';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
     dispatch: AppDispatch;

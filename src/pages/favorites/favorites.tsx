@@ -5,7 +5,7 @@ import Footer from '../../components/footer/footer';
 import Spinner from '../../components/spinner/spinner';
 import FavoritesCardList from '../../components/favorities-card-list/favorities-card-list';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
-import { getFavoritesIsNotFound, getFavoritesIsLoading } from '../../store/favorites-process/favorites-process.selectors';
+import { getFavoritesIsNotFound, getFavoritesIsLoading } from '../../store/favorites/favorites.selectors';
 
 export default function FavoritePage(): JSX.Element {
   const isLoading = useAppSelector(getFavoritesIsLoading);

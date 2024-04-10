@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import FavoritesCard from '../../components/favorities-card/favorities-card';
-import { getFavorites } from '../../store/favorites-process/favorites-process.selectors';
-import { setCityActive, getOffers, setChangeMap } from '../../store/offers-process/offers-process.slice';
+import { getFavorites } from '../../store/favorites/favorites.selectors';
+import { setCityActive, getOffers, setChangeMap } from '../../store/offers/offers.slice';
 
 export default function FavoritesCardList(): JSX.Element {
   const favoritesCardsList = useAppSelector(getFavorites);

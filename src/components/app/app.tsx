@@ -11,8 +11,8 @@ import Spinner from '../spinner/spinner';
 import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
-import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
-import { getOffersIsLoading } from '../../store/offers-process/offers-process.selectors';
+import { getAuthorizationStatus } from '../../store/user/user.selectors';
+import { getOffersIsLoading } from '../../store/offers/offers.selectors';
 
 export default function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);

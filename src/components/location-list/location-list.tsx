@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import {useAppDispatch} from '../../hooks/index';
-import { setCityActive, setChangeMap, getOffers } from '../../store/offers-process/offers-process.slice';
+import { setCityActive, setChangeMap, getOffers } from '../../store/offers/offers.slice';
 import { citiesList, AppRoute } from '../../const';
 
 type LocationListProps = {
@@ -21,7 +21,7 @@ export default function LocationList({cityActive }: LocationListProps): JSX.Elem
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {citiesList.map((city) => (
+          {citiesList?.map((city) => (
             <li key={city} className="locations__item">
               <Link
                 className={classNames('locations__item-link tabs__item', {
