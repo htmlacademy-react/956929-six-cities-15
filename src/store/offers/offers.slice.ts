@@ -33,8 +33,7 @@ export const offers = createSlice({
     },
 
     setChangeMap(state) {
-      const cityMapActive = state.offers[0].city;
-      state.city = cityMapActive;
+      state.city = state.offers[0]?.city;
     },
 
     setSortType(state, action: PayloadAction<SortType>) {
