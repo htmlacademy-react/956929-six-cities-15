@@ -10,7 +10,7 @@ import PrivateRoute from '../private-route/private-route';
 import Spinner from '../spinner/spinner';
 import { useAppSelector } from '../../hooks';
 import browserHistory from '../../browser-history';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import { getAuthorizationStatus } from '../../store/user/user.selectors';
 import { getOffersIsLoading } from '../../store/offers/offers.selectors';
 
